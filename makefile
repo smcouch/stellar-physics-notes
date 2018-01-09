@@ -45,12 +45,21 @@ BIBS = bibs/stellar.bib
 
 default: $(BASE).pdf
 
+handout: sample-handout.pdf
+
 $(BASE).pdf: $(BASE).tex $(TEX_SRC) $(FIGURES) $(BIBS)
 	git rev-parse --short=8 HEAD > git-info.tex
 	$(COMPILE) $(OPS) $(BASE).tex
 	bibtex $(BASE).aux
 	$(COMPILE) $(OPS) $(BASE).tex
 	$(COMPILE) $(OPS) $(BASE).tex
+
+sample-handout.pdf: sample-handout.tex $(TEX_SRC) $(FIGURES) $(BIBS)
+	git rev-parse --short=8 HEAD > git-info.tex
+	$(COMPILE) $(OPS) sample-handout.tex
+	bibtex sample-handout.aux
+	$(COMPILE) $(OPS) sample-handout.tex
+	$(COMPILE) $(OPS) sample-handout.tex
 
 clean:
 	$(RM) *.aux *.log *.dvi *.bbl *.blg *.toc *.log *.synctex* *.out
