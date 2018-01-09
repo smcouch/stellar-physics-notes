@@ -19,7 +19,8 @@ CHAPTERS = 	frontmatter \
 			perturbations \
 			initial-mass-function \
 			binaries \
-			technical-notes
+			technical-notes \
+			prelim
 
 TEX_SRC = $(foreach chap, $(CHAPTERS), $(wildcard $(chap)/*.tex))
 
