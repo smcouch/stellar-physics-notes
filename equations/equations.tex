@@ -24,14 +24,14 @@ Note the general form of a conservation equation:
 \end{eqnarray*}
 Because the momentum density $\rho\bvec{u}$ is a vector, its flux is a tensor: $[\bvec{u}(\rho\bvec{u})]_{ij} \equiv \rho u_{i}u_{j}$.\marginnote{By $\rho u_{i}u_{j}$, we mean the momentum along direction $i$ being transported along direction $j$.}
 
-\newthought{The next equation is that of energy conservation.} Here we must consider both the internal energy per unit volume $E/V = \rho \varepsilon$ and the kinetic energy per unit volume $\rho u^{2}/2$.  In this section $\varepsilon$ represents the internal energy per unit mass of the fluid. In a fixed volume of the fluid the total energy is thus 
+\newthought{The next equation is that of energy conservation.} Here we must consider both the internal energy per unit volume $E/V = \rho \varepsilon$ and the kinetic energy per unit volume $\rho u^{2}/2$.  In this section $\varepsilon$ represents the internal energy per unit mass of the fluid. In a fixed volume of the fluid the total energy is thus
 \[ \int_{V} \left(\rho \frac{1}{2}u^{2} + \rho \varepsilon \right)\,\dif V. \]
 The flux of energy into this volume will clearly include
 \[ -\int_{\partial V}\left(\frac{1}{2}\rho u^{2} + \rho \varepsilon\right) \vu\vdot\dif\bvec{S}. \]
-But wait, there's more!  In addition, we have a conductive heat flux $\bvec{F}$; the total heat conducted through the surface $\partial V$ is 
-\[-\int_{\partial V}\bvec{F}\vdot\dif\bvec{S}.\] 
-Moreover, the pressure acting on fluid flowing into our volume does work on the gas at a rate 
-\[-\int_{\partial V}P\vu\vdot\dif\bvec{S}.\] 
+But wait, there's more!  In addition, we have a conductive heat flux $\bvec{F}$; the total heat conducted through the surface $\partial V$ is
+\[-\int_{\partial V}\bvec{F}\vdot\dif\bvec{S}.\]
+Moreover, the pressure acting on fluid flowing into our volume does work on the gas at a rate
+\[-\int_{\partial V}P\vu\vdot\dif\bvec{S}.\]
 As a result, the net change of energy in our volume is
 \begin{eqnarray}
 \lefteqn{\partial_{t}\int_{V}\left(\frac{1}{2}\rho u^{2} + \rho \varepsilon\right)\nsp\dif V = }\nonumber \\
@@ -42,7 +42,7 @@ As a result, the net change of energy in our volume is
 On the right-hand side we've added in the work done by gravity and the heating evolved by nuclear reactions (this could also involve sinks, such as neutrinos with a long mean free path).
 Expressed in differential form, equation~(\ref{e.energy-1}) is
 \begin{equation}\label{e.energy-2}
- \partial_{t}\left(\frac{1}{2}\rho u^{2} + \rho \varepsilon\right) 
+ \partial_{t}\left(\frac{1}{2}\rho u^{2} + \rho \varepsilon\right)
  	+ \divr\left[\rho\vu\left(\frac{1}{2} u^{2} + \varepsilon + \frac{P}{\rho}\right)\right]
 	+ \divr\bvec{F} = \rho q + \rho \vu\vdot\bvec{g}.
 \end{equation}
@@ -57,6 +57,7 @@ specifies the gravitational acceleration $\bvec{g} = -\grad\Phi$. We then need o
 \bvec{F} = -K\grad T.
 \end{equation}
 This assumption is clearly questionable near the stellar surface, and we have left unspecified the form of $K$.  Such an equation does, however, close the system of equations; all of the physics is then contained in the equation of state $P(\rho,T,\{X_{i}\})$, the rate of heating from nuclear reactions $q(\rho, T, \{X_{i}\})$, and the thermal conductivity $K(\rho,T,\{X_{i}\})$. Here $\{X_{i}\}$ are the mass fractions of the isotopes composing the solar plasma. We will also need a system of equations to describe how the $X_{i}$ change as a result of nuclear reactions and diffusion.
+
 
 \section[Thermodynamics of a Mixture]{Thermodynamics of a mixture: A digression}\label{s.composition}
 \subsection{Specifying the composition}
@@ -134,9 +135,9 @@ In stellar structure work, it is common to use the \emph{mean molecular weight},
 \sum_{i} n_{i} + n_{e} \equiv \frac{\rho\NA}{\mu}.
 \end{equation}
 Yes, this is still the redefined $\NA$: $\mu$ is dimensionless. From the definition,
-\[
-\mu = \left(\sum_{i}Y_{i} + Y_{e}\right)^{-1} = \left[ \sum_{i}\left(Z_{i}+1\right)Y_{i} \right]^{-1};
-\]
+\begin{equation}
+\mu = \left(\sum_{i}Y_{i} + Y_{e}\right)^{-1} = \left[ \sum_{i}\left(Z_{i}+1\right)Y_{i} \right]^{-1};\label{e.meanmol}
+\end{equation}
 sometimes astronomers also define the mean ion molecular weight, $\mu_{I} = (\sum Y_{i})^{-1}$, and the mean electron weight, $\mu_{e} = Y_{e}^{-1}$.
 
 \begin{exercisebox}[Mean molecular weight of a hydrogen-helium plasma]
@@ -149,6 +150,53 @@ Assume that we can describe this plasma as an ideal gas.  What is the sound spee
 
 
 %In Ch.~\ref{ch.introduction} we listed the abundances of several elements in the sun: for $A_{\mathrm{el}} \equiv \log_{10}[N_{\mathrm{el}}/N_{\mathrm{H}}]+12$, $A_{\mathrm{H}} = 12.00$, $A_{\mathrm{He}} = 10.93$, $A_{\mathrm{N}}=7.78$, $A_{\mathrm{O}}=8.66$, $A_{\mathrm{C}} = 8.39$.  Assume that the isotopes for each element are, respectively, \hydrogen, \helium, \nitrogen, \oxygen, and \carbon; from this, derive the corresponding mass fractions for each isotope.
+
+\section{The Equation of State of an Ideal Gas} \label{s.idealgas}
+Equations~(\ref{e.mass-1}), (\ref{e.momentum-2}), and (\ref{e.energy-2} must be closed by a suitable {\it equation of state} that relates the thermodynamic quantities to each other.
+A simple equation of state is that of an ideal gas.
+An {\it ideal gas} is assumed to be made of vast numbers of point-like particles that interact only via elastic collisions.
+This is generally a pretty good approximation for a monatomic, single-species gas but also works fairly well for molecular real gasses such as the terrestrial atmosphere, within certain limits.
+Typically, a gas behaves more ideal at higher temperatures at which the kinetic motion of the particles dominate any intermolecular forces (i.e., van der Waals) that the gas may experience.
+Ideal gasses obey the {\it ideal gas law}.
+A {\it perfect gas} is a special case of an ideal gas that has constant heat capacities at constant volume and at constant pressure (see Section \ref{s.thermodynamics}).
+In general, an ideal gas can have heat capacities that temperature- and/or density-dependent.
+
+Consider a closed volume containing a large number of point-like collisional particles.
+Elastic collisions of these particles with the walls of the volume will result in a force exerted on the walls.
+In the absence of any external forces (i.e., gravity), the force exerted will be the same for all the walls of the volume.
+The force per wall area is the {\it pressure} P on the walls.
+
+The ideal gas law was first determined empirically by chemists in the 19th century and relates the pressure of a gas to its volume and temperature:
+\begin{equation}
+	PV = N_m R T, \label{e.ideal1}
+\end{equation}
+where $V$ is the volume of the gas, $T$ its temperature, $N_m$ the number of {\it moles} of gas, and $R$ is the universal gas constant.
+It turns out, experimentally, the number of particles in a mole of gas is a universal constant: Avogadro's number \NA.
+The universal gas constant is the product of Avogadro's number and the Boltzmann constant \kB: $R=\NA \kB$.
+Thus, we can write the ideal gas law in a form more familiar to physicists,
+\begin{equation}
+	P = n\kB T,\label{e.ideal2}
+\end{equation}
+where $n = N_M\NA/V$ is the number density of particles in the gas.
+
+If the particles can be described by a mean atomic mass $\bar{A}$ (Eq. \ref{e.mean-A}) then we can express the mass density in terms of the number density as $\rho = n A \mb$, where \mb is the atomic mass unit. Then another form of the ideal gas law is
+\begin{equation}
+	P = \frac{\rho}{\bar{A} \mb} \kB T.\label{e.ideal3}
+\end{equation}
+
+For a mixture of different particle types, including free electrons as we would have in a stellar plasma, we can express the ideal gas law in yet another equivalent form using the mean molecular weight,
+\begin{equation}
+	P = \frac{\NA \rho}{\mu} \kB T = \frac{\rho}{\mu \mb} \kB T,\label{e.ideal4}
+\end{equation}
+where we recognize that $\NA \approx \mb^{-1}$.
+Using the definition of the mean molecular mass in terms of the molar fractions (Eq. \ref{e.meanmol}), we see that the total pressure is the sum of partial pressures,
+\begin{equation}
+	P = \left(\sum_{i}Y_{i} + Y_{e}\right) \NA \kB \rho T.\label{e.ideal5}
+\end{equation}
+
+Equations (\ref{e.ideal1}-\ref{e.ideal5}) are all equivalent for a gas of identical particles, with Eqs. (\ref{e.ideal4}) and (\ref{e.ideal5}) being more general for a mixture that includes free electrons as well as ions.
+
+\section{Thermodynamics of Stellar Plasmas} \label{s.thermodynamics}
 
 \subsection{Thermodynamical quantities}
 
@@ -176,8 +224,8 @@ as a Lagrangian coordinate $m$; we then transform coordinates from $(r,t)$ to $(
 To do this, differentiate eq.~(\ref{e.mass}) w.r.t.\ $r$,
 \[ \partial_{r}m = 4\pi r^{2}\rho, \]
 and substitute for $\rho$ in the equation of  continuity (eq.~[\ref{e.mass-1}]).  The first term becomes
-\[ 
-	\partial_{t}\rho = \partial_{t}\left(\frac{1}{4\pi r^{2}} \partial_{r} m\right) 
+\[
+	\partial_{t}\rho = \partial_{t}\left(\frac{1}{4\pi r^{2}} \partial_{r} m\right)
 	= \frac{1}{4\pi r^{2}}\partial_{r}(\partial_{t}m),
 \]
 while the second term becomes
@@ -191,7 +239,7 @@ the equation of continuity therefore becomes
 We can integrate this over $r$ to find that $\partial_{t} m + u\partial_{r} m = f(t)$, where $f(t)$ is some as-yet-unspecified function; to fix $f(t)$, we note that since $m(0,t) = 0,\;\forall t$, we must have $f(t) = 0$.  Now $\partial_{t} m + u\partial_{r} m = \Dif m/\Dif t = 0$, so along a streamline, $m$ is a constant.  We can therefore transform from coordinates $(r,t)$ to $(m,t)$ by setting
 \begin{eqnarray}
 	\label{e.lagrange-rule-1}
-	\left.\frac{\partial}{\partial_{t}}\right|_{r} + u\left.\frac{\partial}{\partial r}\right|_{t} 
+	\left.\frac{\partial}{\partial_{t}}\right|_{r} + u\left.\frac{\partial}{\partial r}\right|_{t}
 	&=& \left.\frac{\partial}{\partial t}\right|_{m} \equiv \frac{\Dif}{\Dif t}\\
 	\label{e.lagrange-rule-2}
 	\left.\frac{\partial}{\partial r}\right|_{t} &=& 4\pi r^{2}\rho \left.\frac{\partial}{\partial m}\right|_{t}.
@@ -204,17 +252,17 @@ Our equation for momentum (eq.~[\ref{e.momentum-1}]) becomes
 \begin{equation}\label{e.lagrange-momentum}
 \frac{\partial P}{\partial m} = -\frac{Gm}{4\pi r^{4}} - \frac{1}{4\pi r^{2}}\frac{\Dif u}{\Dif t}.
 \end{equation}
-In hydrostatic balance the second term on the right-hand side is negligible.  
+In hydrostatic balance the second term on the right-hand side is negligible.
 The flux equation, (eq.~[\ref{e.conduction-simple}]) can be transformed to
 \begin{equation}\label{e.lagrange-flux}
 \frac{\partial T}{\partial m} = - \frac{1}{16\pi^{2} r^{4}\rho K}L_{r}
 \end{equation}
-Here $L_{r}$ is the luminous flux at a radius $r$. 
+Here $L_{r}$ is the luminous flux at a radius $r$.
 %	\frac{\partial T}{\partial m} = -\frac{3}{64\pi^{2}r^{4}}\frac{\kappa}{ac T^{3}}L_{r}.
 
 The energy equation (eq.~[\ref{e.energy-2}]) is more complicated. We can expand the time derivative as
 \begin{eqnarray*}
-	\partial_{t} \left( \frac{1}{2}\rho u^{2} + \rho \varepsilon \right) 
+	\partial_{t} \left( \frac{1}{2}\rho u^{2} + \rho \varepsilon \right)
 	&=& \left(\frac{1}{2}u^{2} + \varepsilon\right)\partial_{t}\rho + \rho\partial_{t}\left[\frac{1}{2}(\vu\vdot\vu) + \varepsilon\right]\\
 	&=& -\left(\frac{1}{2}u^{2} + \varepsilon\right)\divr\left(\rho\vu\right) + \rho \vu\partial_{t}\vu + \rho\partial_{t}\varepsilon,
 \end{eqnarray*}
@@ -222,9 +270,9 @@ using equation~(\ref{e.mass-1}) to substitute for $\partial_{t}\rho$.  We then u
 \begin{equation}\label{e.energy-3}
 	\rho\left(\partial_{t} + \vu\vdot\grad\right) \varepsilon + P\divr\vu = -\divr\bvec{F} + \rho q.
 \end{equation}
-We've canceled all common factors here.  Finally, we once again use equation~(\ref{e.mass-1}) to set 
+We've canceled all common factors here.  Finally, we once again use equation~(\ref{e.mass-1}) to set
 \[
-	P\divr\vu = -(P/\rho)(\partial_{t}\rho + \vu\vdot\grad \rho) 
+	P\divr\vu = -(P/\rho)(\partial_{t}\rho + \vu\vdot\grad \rho)
 	= \rho P\left(\partial_{t} + \vu\vdot\grad\right)\left(\frac{1}{\rho}\right).
 \]
 Substituting this into the left-hand of equation~(\ref{e.energy-3})  and using the first law of thermodynamics (see eq.~[\ref{e.first-law-intensive}]), we obtain
@@ -239,7 +287,7 @@ Putting everything together, we finally have our heat equation in Lagrangian for
 \begin{equation}\label{e.lagrange-heat}
 	\frac{\partial L_{r}}{\partial m} = q - T\frac{\Dif s}{\Dif t}.
 \end{equation}
-This has a simple interpretation: the change in luminosity across a mass shell is due to sources or sinks of energy and the change in the heat content of the shell.  
+This has a simple interpretation: the change in luminosity across a mass shell is due to sources or sinks of energy and the change in the heat content of the shell.
 
 \begin{exercisebox}[Lagrangian form of $T\Dif s/\Dif t$]
  \label{p.lagrange-heat} Show that equation (\ref{e.lagrange-heat}) can be written as
@@ -255,7 +303,7 @@ where
  \Gamma_{1} &\equiv& (\partial \ln P/\partial\ln \rho)_{s}\,,\textrm{and}\\
  \Gamma_{3}-1 &\equiv& \tderiv{\ln T}{\ln \rho}{s}
 \end{eqnarray*}
-are defined in Appendix~\ref{s.thermo-derivatives}. 
+are defined in Appendix~\ref{s.thermo-derivatives}.
 \end{exercisebox}
 
 
@@ -269,7 +317,7 @@ and use the identity (see Appendix~\ref{s.thermo-derivatives})
 \]
 to obtain
 \begin{equation}\label{e.lagrange-heat-alt}
-	\frac{\partial L_{r}}{\partial m} 
+	\frac{\partial L_{r}}{\partial m}
 	= q - c_{P}\left[ \frac{\Dif T}{\Dif t} - \tderiv{T}{P}{s} \frac{\Dif P}{\Dif t}\right].
 \end{equation}
-Equations~(\ref{e.lagrange-r}), (\ref{e.lagrange-momentum}), (\ref{e.lagrange-flux}), and (\ref{e.lagrange-heat-alt}), when supplemented by an equation of state, a prescription for the thermal conductivity, and the equations for nuclear heating and neutrino cooling, form the equations for stellar structure and evolution in spherical symmetry. 
+Equations~(\ref{e.lagrange-r}), (\ref{e.lagrange-momentum}), (\ref{e.lagrange-flux}), and (\ref{e.lagrange-heat-alt}), when supplemented by an equation of state, a prescription for the thermal conductivity, and the equations for nuclear heating and neutrino cooling, form the equations for stellar structure and evolution in spherical symmetry.
