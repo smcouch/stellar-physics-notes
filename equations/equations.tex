@@ -158,8 +158,8 @@ An {\it ideal gas} is assumed to be made of vast numbers of point-like particles
 This is generally a pretty good approximation for a monatomic, single-species gas but also works fairly well for molecular real gasses such as the terrestrial atmosphere, within certain limits.
 Typically, a gas behaves more ideal at higher temperatures at which the kinetic motion of the particles dominate any intermolecular forces (i.e., van der Waals) that the gas may experience.
 Ideal gasses obey the {\it ideal gas law}.
-A {\it perfect gas} is a special case of an ideal gas that has constant heat capacities at constant volume and at constant pressure (see Section \ref{s.thermodynamics}).
-In general, an ideal gas can have heat capacities that temperature- and/or density-dependent.
+A {\it perfect gas} is a special case of an ideal gas that has constant specific heat capacities at constant volume and at constant pressure (see Section \ref{s.thermodynamics}).
+In general, an ideal gas can have specific heat capacities that temperature- and/or density-dependent.
 
 Consider a closed volume containing a large number of point-like collisional particles.
 Elastic collisions of these particles with the walls of the volume will result in a force exerted on the walls.
@@ -198,19 +198,220 @@ Equations (\ref{e.ideal1}-\ref{e.ideal5}) are all equivalent for a gas of identi
 
 \section{Thermodynamics of Stellar Plasmas} \label{s.thermodynamics}
 
-\subsection{Thermodynamical quantities}
-
-In most textbooks on thermodynamics and statistical mechanics, the thermodynamics are formulated in terms of some sample of fixed size. For example, in the first law,
-\begin{equation}\label{e.first-law-extensive}
-\dif E = T\dif S - P\dif V,
+\subsection{The First Law}
+Consider a volume of gas that can exchange energy with its surrounding either by the transfer of heat or by doing {\it work}.
+Now assume the gas undergoes a truly {\it reversible} process, in which the state of the gas changes slowly enough that it is always in equilibrium.
+I.e., throughout the entire process the gas moves through a series of infinitesimally different equilibrium states.
+In such a process, the change in the gas internal energy will be
+\begin{equation}
+	\dif E = \dif Q - \dif W,
 \end{equation}
-the energy $E$ and entropy $S$ are extensive quantities that scale with the number of particles $N$ in our sample. In a fluid, however, these quantities are all functions of position. By $S(r)$, we mean that we can define a small portion of the star about the coordinate $r$ that is large enough particles to ensure that quantities such as pressure and temperature are well-defined, but small enough that we can treat $S(r)$ as a continuous function of position when integrating over the whole star.
+where $dQ$ is the heat gained or lost and $dW$ is the work done {\it by} the gas (positive sign) or {\it on} the gas by its surroundings (negative sign).
 
-Using extensive quantities in fluid mechanics is cumbersome, so we instead use quantities like the energy per unit mass $\varepsilon  = E/(\rho V)$ or the entropy per unit mass $s = S/(\rho V)$. Since a fixed mass of fluid $M$ occupies a volume $V = M/\rho$, we can divide the first law, eq.~(\ref{e.first-law-extensive}), by $M$ to obtain
+First, let's consider how to deal with the work term.
+If the gas is ``contained'' within some volume $V$, the gas exerts a differential force on the ``wall'' of this volume,
+\[
+	\delta \bvec{F} = P \delta A \hat{n},
+\]
+where $\delta A$ is some differential area element of the volume walls.
+Now consider that the force exerted by the gas causes an infinitesimal displacement $\dif \bvec{x}$ in the volume walls doing some differential {\it work} (i.e., force through a distance),
+\[
+	\delta (\dif W) = \delta \bvec{F}\cdot\dif\bvec{x} = P (\hat{n}\cdot\dif\bvec{x})\delta A = P \delta V.
+\]
+Now, integrating over all area of the volume walls gives us $\dif W = P\dif V$, which you will recall elementary dynamics.
+Then we have the First Law of Thermodynamics,
+\begin{equation}
+	\dif E = \dif Q - P\dif V. \label{e.first-law-extensive}
+\end{equation}
+\marginnote{First Law of Thermodynamics}
+
+In Eq. (\ref{e.first-law-extensive}) the energy $E$ and heat $Q$ are {\it extensive} quantities that scale with the number of particles $N$ in our sample. In a fluid, however, these quantities are all functions of position. By $E(r)$, we mean that we can define a small portion of the star about the coordinate $r$ that is large enough particles to ensure that quantities such as pressure and temperature are well-defined, but small enough that we can treat $E(r)$ as a continuous function of position when integrating over the whole star.
+\marginnote{Extensive vs. intensive quantities}
+
+Using extensive quantities in fluid mechanics is cumbersome, so we instead use quantities like the energy per unit mass $\varepsilon  = E/(\rho V)$ or the heat per unit mass $q = Q/(\rho V)$. Since a fixed mass of fluid $M$ occupies a volume $V = M/\rho$, we can divide the first law, eq.~(\ref{e.first-law-extensive}), by $M$ to obtain
 \begin{equation}\label{e.first-law-intensive}
-\dif \varepsilon = T\dif s - P\dif\left(\frac{1}{\rho}\right) = T\dif s + \frac{P}{\rho^{2}}\dif \rho.
+\dif \varepsilon = \dif q - P\dif\left(\frac{1}{\rho}\right) = \dif q + \frac{P}{\rho^{2}}\dif \rho.
 \end{equation}
 The other extensive variables can be re-defined into mass-specific forms in a similar fashion.
+
+The definition of an {\it adiabatic} process is one in which there is no change in the heat content of the system, $\dif Q \equiv 0$.
+\marginnote{Adiabatic process}
+Consider the Joule-Kelvin experiment in which a gas is allowed to expand adiabatically ($\dif Q=0$) into a larger volume initially a vacuum (i.e., $V_1 < V_2$).
+Since the gas experiences no resistance while expanding into the new volume it does not do any work while expanding, $\dif W = P\dif V = 0$.
+Therefore, by the First Law (Eq. \ref{e.first-law-extensive}), we have $\dif E = 0$ implying that the temperature remains constant during the expansion, $T_2 = T_1$.
+Thus, the internal energy of the gas is a function only of temperature, $E(T)$.
+In general, we would expect that the internal energy is also a function of density (or volume), $E(V,T)$.
+This somewhat surprising result only holds for perfect gasses.
+
+\subsection{Heat Capacity and Thermodynamic Derivatives}
+
+Now consider a non-adiabtic process in which some heat, $\dif q$, is added to the system resulting in a temperature change $\dif T$.
+The {\it specific heat capacity}, or simply specific heat, is then defined as
+\[
+	C \equiv \frac{\dif q}{\dif T},
+\]
+where, again, the heat per mass is $q$.
+Specific heats are usually specified under conditions in which a thermodynamic quantity is assumed constant.
+For instance, the specific heat at constant pressure is $C_P$ and the specific heat at constant volume is $C_V$.
+
+A key feature of thermodynamics is that any thermodynamic quantity can be expressed as a function of any other {\it two} thermodynamic quantity.
+Consider, for instance, the ideal gas law (e.g., Eq. \ref{e.ideal3}), which can obviously be arranged as we like to give $P(\rho, T)$, or $T(\rho, P)$, or $\rho(P,T)$.
+Thus, it is useful to define derivatives of thermodynamic quantities with respect to others while keeping a third quantity fixed.
+For variables $x, y, z$ we would write this using the notation,
+\[
+	\left(\frac{\partial z}{\partial x}\right)_y,
+\]
+where the subscript $y$ is the variable held fixed while calculating the derivative of $z$ with respect to $x$.
+
+Now assume that our variables $(x,y,z)$ can be connected by some function $\mathcal{F}(x,y,z)=0$ (such as you might get by moving the RHS of the ideal gas law to the LHS).
+Then, we can derive several useful relations (see Appendix \ref{s.thermo-derivatives}):
+\begin{eqnarray}
+	\left(\frac{\partial x}{\partial y}\right)_z &=& \frac{1}{(\partial y/\partial x)_z}, \\
+	\left(\frac{\partial x}{\partial y}\right)_z \left(\frac{\partial y}{\partial z}\right)_x \left(\frac{\partial z}{\partial x}\right)_y &=& -1.
+\end{eqnarray}
+Now if some other quantity, $w$, is a function of any two of $(x,y,z)$, then
+\begin{equation}
+	\left(\frac{\partial x}{\partial y}\right)_w \left(\frac{\partial y}{\partial z}\right)_w = \left(\frac{\partial x}{\partial z}\right)_w.
+\end{equation}
+
+Consider as independent variables $(\rho, T, \varepsilon)$. Expanding the total differential of $\varepsilon$ in terms of its partial derivatives w.r.t. $\rho$ and $T$, we have
+\[
+	\dif \varepsilon = \left(\frac{\partial \varepsilon}{\partial T}\right)_\rho \dif T + \left(\frac{\partial \varepsilon}{\partial \rho}\right)_T \dif \rho.
+\]
+Using the First Law (Eq. \ref{e.first-law-intensive}) we then find
+\begin{equation}
+	\dif q = \left(\frac{\partial \varepsilon}{\partial T}\right)_\rho \dif T + \left[\left(\frac{\partial \varepsilon}{\partial rho}\right)_T - \left(\frac{P}{\rho^2}\right)\right] \dif \rho. \label{e.firstLaw2}
+\end{equation}
+
+For a process occurring at constant volume, the density is also constant\sidenote{Unless we are creating and destroying mass!}, $\dif \rho=0$.
+The change in heat is given by $\dif q = C_V \dif T$.
+Then by inspection, we find that the specific heat at constant volume is
+\begin{equation}
+	C_V = \left(\frac{\partial \varepsilon}{\partial T}\right)_\rho. \label{e.specHeatV}
+\end{equation}
+This is result is {\it completely general} for any thermodynamic expression relating $(\rho, T, e)$.
+
+Similarly, at constant pressure the heat change is $\dif q = C_P \dif T$, and the specific heat is
+\begin{equation}
+	C_P = C_V + \left[\left(\frac{\partial \varepsilon}{\partial \rho}\right)_T - \left(\frac{P}{\rho^2}\right) \right] \left(\frac{\partial \rho}{\partial T}\right)_P. \label{e.specHeatP}
+\end{equation}
+
+For an adiabatic process, we have $\dif q = 0$ and can rearrange Eq. (\ref{e.firstLaw2}) to find
+\begin{eqnarray}
+		\left(\frac{\partial \varepsilon}{\partial T}\right)_\rho \dif T &+& \left[\left(\frac{\partial \varepsilon}{\partial \rho}\right)_T - \left(\frac{P}{\rho^2}\right)\right] \dif \rho = 0 \nonumber \\
+		 \left(\frac{\partial \varepsilon}{\partial T}\right)_\rho \dif T &=& \left[\left(\frac{P}{\rho^2}\right) -\left(\frac{\partial \varepsilon}{\partial \rho}\right)_T \right] \dif \rho  \nonumber\\
+		 \left(\frac{\partial \varepsilon}{\partial T}\right)_\rho \left(\frac{\partial T}{\partial \rho}\right)_s  &=& \left[\left(\frac{P}{\rho^2}\right) -\left(\frac{\partial \varepsilon}{\partial \rho}\right)_T \right] \nonumber\\
+		 C_V \left(\frac{\partial T}{\partial \rho}\right)_s  &=& \left[\left(\frac{P}{\rho^2}\right) -\left(\frac{\partial \varepsilon}{\partial \rho}\right)_T \right]
+\end{eqnarray}
+where we have used the definition of the specific heat at constant volume (Eq. \ref{e.specHeatV}) and transformed the full derivative $(\dif T/\dif \rho)$ into a partial derivative at constant entropy, $s$.
+
+The specific heat at constant pressure, Eq. (\ref{e.specHeatP}), is not nearly as simple and neat an expression as that for constant volume, Eq. (\ref{e.specHeatV}).
+We can gain some physical insight into the specific heat at constant pressure by defining the specific {\it enthalpy}:
+\begin{equation}
+	h = \varepsilon + PV = \varepsilon + \frac{P}{\rho}.
+\end{equation}
+The change in enthalpy in some thermodynamic process is then
+\[
+	\dif h = \dif \varepsilon + P \dif(1/\rho) + \dif P / \rho
+\]
+Substituting into the First Law, Eq. (\ref{e.first-law-intensive}), we find
+\[
+	\dif q = \dif h - \frac{\dif P}{\rho}.
+\]
+Therefor, at constant pressure ($\dif P=0$) we recognize that we can write the specific heat by replace $q$ with $h$:
+\begin{equation}
+	C_P = \left(\frac{\partial h}{\partial T}\right)_P,
+\end{equation}
+a much simpler expression than Eq. (\ref{e.specHeatP}).
+This implies that for isobaric processes, the enthalpy takes the role of internal energy for isovolumetric processes. \marginnote{Neat!}
+
+\subsection{The Second Law}
+
+Empirically, it is found that not all energy-conserving cyclic processes are possible.
+That is, energy in such processes is transferred into, e.g., its surroundings and is rendered unavailable to do work or heat.
+In a sense, the original energy of they system is {\it degraded} and, even if total energy is conserved, it is not possible to return the system to its original state.\marginnote{The process is irreversible.}
+
+To understand this behavior of gasses, we must first introduce a new thermodynamic state function, {\it entropy} $S$.
+If in a reversible process a system exchanges some heat $\dif Q$ with a reservoir at temperate $T$, the than change in entropy is
+\begin{equation}
+	\dif S \equiv \frac{\dif Q}{T}. \label{e.difS}
+\end{equation}
+Using this definition of entropy, we can re-write the First Law (Eqs. \ref{e.first-law-extensive} and \ref{e.first-law-intensive}) as
+\begin{eqnarray}
+	T \dif S = \dif E + P \dif V \\
+	T \dif s = \dif \varepsilon + \frac{P}{\rho^2}\dif\rho,
+\end{eqnarray}
+where the second version is the intensive form as we have entropy the {\it specific entropy} $s$.
+
+For any cyclic process, the integral of Eq. (\ref{e.difS}) over an entire cycle must to be less than equal to zero. That is
+\begin{equation}
+	\oint \frac{\dif Q}{T} \leq 0. \label{e.sec-law-1}
+\end{equation}
+This is an elementary state of the Second Law of Thermodynamics.
+
+To elucidate the meaning of this further, consider a reversible process in which heat $\dif Q_1 (T)$ is delivered to the system.
+In order to reverse the process and return the system to its original state, heat $\dif Q_2 (T) \equiv -\dif Q_1 (T)$ must be given to the system. Equation (\ref{e.difS}) requires that any cycle of the system satisfies both
+\[
+	\oint \frac{\dif Q_1 (T)}{T} \leq 0
+\]
+and
+\[
+	\oint \frac{\dif Q_2 (T)}{T} = -\oint \frac{\dif Q_1(T)}{T} \leq 0.
+\]
+In order for both conditions to be simultaneously true, the heat transfer must be zero so that for a reversible process
+\begin{equation}
+	\oint_\mathrm{rev} \frac{\dif Q}{T} = 0. \label{e.rev-dQ}
+\end{equation}
+This then implies that $\dif S = 0$ by Eq. (\ref{e.difS}).
+I.e., in a reversible process, the entropy remains constant.
+
+It will turn out that Eq. (\ref{e.difS}) is an {\it exact} differential, i.e. $\int dS$ is path-independent.\marginnote{An exact differential is one that can be express $\dif f = (\partial f / \partial x)_y \dif x + (\partial x / \partial y)_x \dif y$.}
+In other words, the entropy difference between two states is independent of the details of the reversible process connecting them.
+If $A$ and $B$ are two states connected by a reversible cycle made up of path 1 ($A$ to $B$) and path 2 ($B$ to $A$) then Eq. (\ref{e.rev-dQ}) implies
+\begin{equation}
+	\oint \frac{\dif Q}{T} = \left(\int_A^B\frac{\dif Q}{T}\right)_1 + \left(\int_B^A\frac{\dif Q}{T}\right)_2 = 0.
+\end{equation}
+Now that we've specified some limits we can write these integrals in terms of the entropies of the states via Eq. (\ref{e.difS})
+\[
+	\left(\int_A^B\frac{\dif Q}{T}\right)_1 = S(B) - S(A),
+\]
+which gives us
+\begin{equation}
+	S(B) - S(A) = -\left(\int_B^A\frac{\dif Q}{T}\right)_2 = \left(\int_A^B\frac{\dif Q}{T}\right)_2,
+\end{equation}
+which proves that the entropy difference of the states doesn't depend on the details of the processes.
+
+Now let's consider that an {\it irreversible} process $I$ connects $A$ to $B$ then reversible process $R$ returns $B$ to $A$.
+Now via Eq. (\ref{e.sec-law-1})
+\begin{equation}
+	\int_I \frac{\dif Q}{T} + \int_R\frac{\dif Q}{T} \leq 0,
+\end{equation}
+or
+\begin{equation}
+	\int_I \frac{\dif Q}{T} \leq \left(-\int_B^A\frac{\dif Q}{T}\right)_R = \left(\int_A^B\frac{\dif Q}{T}\right)_R = S(B) - S(A).
+\end{equation}
+This implies that for an isolated system (i.e., $\dif Q=0$) entropy can only increase:
+\[
+	S(B) \geq S(A)
+\]
+where the equality holds for reversible processes only.
+All processes in the real world are actually irreversible, at least to some extent.
+Thus, the entropy of any real system always increases, even if that system is perfectly thermally insulated ($\dif Q=0$).
+
+\subsection{Some Thermal Properties of Ideal Gasses}
+
+We often approximate stellar plasmas as ideal gasses, fraught as that may be.
+As we argued above, the internal energy is a function of temperature only.
+So using the definition of the specific heat (Eq. \ref{e.specHeatP}) we have
+\begin{equation}
+	\varepsilon = \int C_V \dif T.
+\end{equation}
+While the proof will require some more development of kinetic theory, we will find that $C_V$ is a constant for an ideal gas, thus
+\begin{equation}
+	\varepsilon = C_V T.
+\end{equation}
+
+
 
 \section{The equations in Lagrangian form}
 
