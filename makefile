@@ -20,7 +20,8 @@ CHAPTERS = 	frontmatter \
 			initial-mass-function \
 			binaries \
 			technical-notes \
-			prelim
+			prelim \
+			kinetic
 
 TEX_SRC = $(foreach chap, $(CHAPTERS), $(wildcard $(chap)/*.tex))
 
@@ -52,6 +53,10 @@ $(BASE).pdf: $(BASE).tex $(TEX_SRC) $(FIGURES) $(BIBS)
 	$(COMPILE) $(OPS) $(BASE).tex
 	bibtex $(BASE).aux
 	$(COMPILE) $(OPS) $(BASE).tex
+	$(COMPILE) $(OPS) $(BASE).tex
+	
+quick: $(BASE).tex $(TEX_SRC) $(FIGURES) $(BIBS)
+	git rev-parse --short=8 HEAD > git-info.tex
 	$(COMPILE) $(OPS) $(BASE).tex
 
 sample-handout.pdf: sample-handout.tex $(TEX_SRC) $(FIGURES) $(BIBS)

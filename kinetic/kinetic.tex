@@ -1,10 +1,310 @@
 % !TEX root = ../stellar-notes.tex
 
-Outline of topics:
-\begin{enumerate}
-  \item phase space
-  \item distribution functions
-  \item Moments of distribution function give macroscopic quantities
-  \item Boltzmann equation (collisions?)
-  \item Moments of Boltzmann equation give Euler equations
-\end{enumerate}
+Kinetic theory deals with collections of particles that evolve by undergoing collisions.
+We will find that for the study of stellar physics, kinetic theory comes up in several aspects including fluid dynamics, radiative transport, equations of state, and nuclear reactions.
+Therefore, in this chapter we will develop some of the fundamentals of kinetic theory and some key relations.
+Much of the development in this chapter follows that in \citet{mihalas:1984} and we refer interested readers to that work for a more thorough discussion of some of these, and related, topics.
+
+\subsection{Distribution Functions and the Boltzmann Equation}
+The physical state of a gas can be described statistically by a {\it distribution function} $f(\bvec{x},\bvec{v},t)$ which describes the occupation of {\it phase space} element $\dif^3 x \dif^3 v$, where $\bvec{x}$ and $\bvec{v}$ the position and velocity vectors. \marginnote{Distribution function}
+The average number of particles contained in the volume $\dif^3 x$ at $\bvec{x}$ and in the velocity-space element $\dif^3 v$ about the velocity $\bvec{v}$ is $f\dif^3 x \dif^3 v$.
+The distribution function cannot be negative and we assume that as the velocity goes to infinity (in either the positive or negative direction) that $f\rightarrow0$ sufficiently fast that there is a finite number of particles and a finite total energy.
+
+Note that a more general phase space is $\dif^3 x \dif^3 p$, where $\bvec{p}$ is the momentum vector.
+Working in momentum space allows for particles of differing masses, or even massless particles such as photons.
+We will switch to momentum space eventually, but for now it is simpler to assume identical massive particles.
+
+Several key macroscopic properties of a gas can be computed from the distribution function. The particle number density is
+\begin{equation}
+  n(\bvec{x},t) = \frac{\dif N}{\dif^3x} = \int_{-\infty}^\infty f(\bvec{x},\bvec{v},t) \dif^3 v,
+\end{equation}
+from which we can easily compute the mass density,
+\begin{equation}
+  \rho(\bvec{x},t) = m n(\bvec{x},t), \label{e.mass-density}
+\end{equation}
+where $m$ is some appropriate (mean) particle mass.
+The average velocity at $\bvec{x}$ can be computed as
+\begin{equation}
+  \bvec{u}(\bvec{x},t) = \langle \bvec{v} \rangle \equiv n^{-1} \int_{-\infty}^{\infty} f(\bvec{x},\bvec{v},t)\bvec{v}\ \dif^3 v.\label{e.avg-vel}
+\end{equation}
+Indeed, the average value of any quantity $Q$\sidenote{Not to be confused with the extensive heat from \ref{s.thermodynamics}.} at some location $\bvec{x}$ can be calculated using the distribution function:
+\begin{equation}
+  \langle Q \rangle = \frac{\int Q f \dif^3 v}{\int f \dif^3v} = n^{-1} \int Qf\dif^3v.\label{e.averages}
+\end{equation}
+In considering the microscopic properties of a gas it will often be convenient to decompose a given particles velocity into {\it bulk} and {\it random} parts:
+\begin{equation}
+  \bvec{v} = \bvec{u} + \bvec{U}, \label{e.vel-decomp}
+\end{equation}
+where is $\bvec{u}$ is the bulk average velocity at $\bvec{x}$ as given in Eq. (\ref{e.avg-vel}) and we have introduced the {\it random velocity} $\bvec{U}$ relative to the mean flow.
+By definition, the mean of the random velocity is zero: $\langle\bvec{U}\rangle \equiv 0$.
+
+Similarly we can obtain the rate at which particles are crossing some unit surface of the $y-z$ plane (i.e., the particle flux in the x-direction) by
+\begin{equation}
+  S_x = \frac{\dif N}{\dif y \dif z \dif t} = \int \frac{\dif N}{\dif x \dif y \dif z \dif^3 v} \frac{\dif x}{\dif t}\dif^3 v = \int f(\bvec{x},\bvec{v},t) v_x \dif^3v.
+\end{equation}
+Generalizing to all directions, the particle flux can be computed as
+\begin{equation}
+  \bvec{S} = \int f(\bvec{x},\bvec{v},t) \bvec{v} \dif^3 v = n\bvec{u},
+\end{equation}
+which we recognize as just the mean velocity times the number density.
+Multiplying this by the mean particle mass again, we obtain the momentum density vector,
+\begin{equation}
+  \mathcal{P} = m\bvec{S} = \rho\bvec{u} = \int m\bvec{v} f(\bvec{x},\bvec{v},t) \dif^3 v. \label{e.momentum-vec}
+\end{equation}
+Define a {\it stress tensor} $T_{jk}$, the meaning of which is the $j$ component of the force per unit area across a surface perpendicular to $\hat{k}$. This has the simultaneous meaning of the $j$ component of the momentum that crosses a unit area perpendicular to $\hat{k}$.\sidenote{See Section 1.9 of \citet{thorne:2017}.}
+Now armed with this definition we can write the rate at which the $j$ component of the momentum crossing the $y-z$ plane as
+\begin{eqnarray}
+  T_{jx} &=& \int \frac{\dif N}{\dif y \dif z \dif t \dif^3v} mv_j \dif^3v = \int \frac{\dif N}{\dif x\dif y \dif z \dif^3v}\frac{\dif x}{\dif t} mv_j \dif^3 v \nonumber \\
+  &=& \int mv_jv_x f \dif^3 v.
+\end{eqnarray}
+Generalizing this to all directions and components, we find
+\begin{equation}
+  T_{jk} = \int mv_j v_k f \dif^3 v. \label{e.stress-tensor}
+\end{equation}
+
+Comparing Eqs. (\ref{e.mass-density}), (\ref{e.momentum-vec}), and (\ref{e.stress-tensor}) we can see that these physical quantities of the fluid actually arise from a hierarchy of {\it moments} in velocity space of the distribution function.
+A moment of the distribution function is formed by multiplying the mass-weighted distribution function $mf$ by the velocity $M^\mathrm{th}$ times then integrating over all velocity space. Or,
+\begin{equation}
+  \mathrm{Moment}(f,M) = m \int (v_i)^M f \dif^3 v. \label{e.moments}
+\end{equation}
+%% Insert some other macroscopic properties from dist func from Thorne & Blandford
+
+Let's now consider how the distribution function evolves in time.
+We will at first ignore particle collisions.
+Consider a group of particles at the phase-space location $(x_0, y_0, z_0, u_0, v_0, w_0)$\sidenote{Where $(u,v,w)$ represent the components of the 3-velocity, $u$ not to be confused with the mean velocity.} in the phase-space volume $(dx_0, dy_0, dz_0, du_0, dv_0, dw_0)$.
+If an external force $\bvec{F}(\bvec{x},t)$ acts on the particles, the acceleration is $\bvec{a}(\bvec{x},t)=m^{-1}\bvec{F}(\bvec{x},t)$, where $m$ is the particle mass.\sidenote{Again, all particles are, for now, assumed to have the same mass $m$.}
+After some time $\dif t$ the particles will evolve into a new phase-space element centered on position $\bvec{x}=\bvec{x}_0 + \bvec{v}_0\dif t$ and velocity $\bvec{v}=\bvec{v}_0 + \bvec{a}\dif t$ with volume $(dx, dy, dz, du, dv, dw)$.
+We can relate the new volume to the original volume via a Jacobian $J$:
+\begin{equation}
+  \dif^3 x \dif^3 v = J(x,y,z,u,v,w/x_0,y_0,z_0,u_0,v_0,w_0) \dif^3x_0 \dif^3v_0.
+\end{equation}
+To first order in $\dif t$, this Jacobian is one: $J = 1 + \mathcal{O}(\dif t^2)$.
+So for sufficiently small $\dif t$ the volume is unchanged,
+\[
+  \dif^3 x \dif^3 v = \dif^3x_0 \dif^3v_0.
+\]
+The total number of particles initially is $\delta N_0=f(\bvec{x}_0, \bvec{v}_0, t_0)\dif^3x_0 \dif^3v_0$ and, in the absence of any collisions, all the same particles that started in $\dif^3x_0 \dif^3v_0$ will end up in $\dif^3x \dif^3v$, so
+\begin{equation}
+  \delta N = f(\bvec{x}=\bvec{x}_0 + \bvec{v}_0\dif t, \bvec{v}=\bvec{v}_0 + \bvec{a}\dif t, t_0+\dif t)\dif^3 x \dif^3 v = \delta N_0.
+\end{equation}
+Now since both the number of particles and the phase space volume are the same, the phase-space density of the group of particles is unchanged. I.e., the distribution function remains the same
+\begin{equation}
+  f(\bvec{x}=\bvec{x}_0 + \bvec{v}_0\dif t, \bvec{v}=\bvec{v}_0 + \bvec{a}\dif t, t_0+\dif t) = f(\bvec{x}_0,\bvec{v}_0,t_0). \label{e.dist-unchanged}
+\end{equation}
+Expanding Eq. (\ref{e.dist-unchanged}) to first order in $\dif t$ we find
+\begin{equation}
+  \frac{\partial f}{\partial t} + v^i\frac{\partial f}{\partial x^i} + a^i \frac{\partial f}{\partial v^i} = 0, \label{e.CBE}
+\end{equation}
+which is the {\it collisionless Boltzmann equation}.\marginnote{Collisionless Boltzmann equation}
+
+Equation (\ref{e.CBE}) only holds when there are no collisions between particles in the gas.
+This is a rather uninteresting case and if we seek to learn something about real stellar plasmas, we'd best include interparticle collisions!
+The effect of collisions is to move some particles in and out of the phase-space element $\dif^3 x \dif^3 v$.
+We can represent this as a source term on the RHS of Eq. (\ref{e.CBE}) resulting in the {\it Boltzmann transport equation}: \marginnote{Boltzmann transport equation}
+\begin{equation}
+  \frac{\partial f}{\partial t} + v^i\frac{\partial f}{\partial x^i} + a^i \frac{\partial f}{\partial v^i} = \left(\frac{\Dif f}{\Dif t}\right)_\mathrm{coll}. \label{e.BTE}
+\end{equation}
+The collision source term is expressed as a Lagrangian derivative because here we are following the evolution of some particular group of particles.
+The exact nature of the collision source term can be complex and depends sensitively on the microphysical nature of the gas under consideration.
+
+\subsection{Fluid Equations from the Boltzmann Equation}
+
+An interesting and useful result of kinetic theory is that we can derive the fluid equations (Eqs. \ref{e.mass-1}, \ref{e.momentum-2}, \& \ref{e.energy-2})  from the Boltzmann transport equation, Eq. \ref{e.BTE}, connecting the macroscopic directly to the microscopic. We begin with taking a {\it moment} of the Boltzmann equation by multiplying by some physical quantity $Q(\bvec{x},\bvec{v})$ and then integrating over velocity space:
+\begin{equation}
+  \int Q \left(\frac{\partial f}{\partial t} + v^i\frac{\partial f}{\partial x^i} + a^i \frac{\partial f}{\partial v^i}\right) \dif^3v = \int Q \left(\frac{\Dif f}{\Dif t}\right)_\mathrm{coll} \dif^3v \equiv I(Q), \label{e.bte-mom-zero}
+\end{equation}
+where we have introduced the collision integral $I(Q)$. Consider now a collision between two particles initial with velocities $\bvec{v}$ and $\bvec{v}_1$. The collision will change the particle velocities: $(\bvec{v},\bvec{v}_1)\rightarrow(\bvec{v}^\prime,\bvec{v}_1^\prime)$. If $Q(\bvec{x},\bvec{v})$ is a conserved quantity during such a collision, then
+\begin{equation}
+  Q(\bvec{x},\bvec{v}) + Q(\bvec{x},\bvec{v}_1) = Q(\bvec{x},\bvec{v}^\prime) + Q(\bvec{x},\bvec{v}_1^\prime),
+\end{equation}
+and the collision integral $I(Q) = 0$.
+This can be understood simply as the collisions at $\bvec{x}$ cannot create or destroy $Q$ only change its distribution in velocity space. Then, if we are integrating over all velocity space the integral must be zero.
+
+Let's consider each term on the LHS of Eq. (\ref{e.bte-mom-zero}) separately. The first term is
+\begin{eqnarray}
+  \int Q \frac{\partial f}{\partial t} \dif^3v &=& \partial_t \int Qf\dif^3v - \int \frac{\partial Q}{\partial t} f \dif^3 v \nonumber \\
+  &=& \partial_t (n\langle Q \rangle) - n\left\langle\frac{\partial Q}{\partial t}\right\rangle, \label{e.mom-zero-1}
+\end{eqnarray}
+where we have used the definition of averages, Eq. (\ref{e.averages}).
+The second term is
+\begin{eqnarray}
+  \int Q v^i\frac{\partial f}{\partial x^i} \dif^3v &=& \frac{\partial}{\partial x^i} \int Qv^if\dif^3v - \int v^i\frac{\partial Q}{\partial x^i}f\dif^3v \nonumber \\
+  &=& \frac{\partial}{\partial x^i} (n\langle Qv^i\rangle) - n\left\langle v^i \frac{\partial Q}{\partial x^i}\right\rangle. \label{e.mom-zero-2}
+\end{eqnarray}
+Finally, the third term on the LHS of Eq. (\ref{e.bte-mom-zero}) becomes
+\begin{eqnarray}
+    \int Qa^i\frac{\partial f}{\partial v^i}\dif^3v &=& \int \frac{\partial (Q a^i f)}{\partial v^i} \dif^3v - \int \frac{\partial (Qa^i)}{\partial v^i} f\dif^3v \nonumber \\
+    &=& \sum_i \int_{-\infty}^\infty \dif v_l \dif v_k \vert_{-\infty}^{\infty} (Qa^if) - n\left\langle\frac{\partial(Qa^i)}{\partial v^i}\right\rangle \nonumber \\
+    &=& -n\left\langle\frac{\partial(Qa^i)}{\partial v^i}\right\rangle, \label{e.mom-zero-3}
+\end{eqnarray}
+where we recognize that as the first integral is now even and that as $v^i\rightarrow \pm\infty$, $f\rightarrow0$ rapidly meaning that $(Qa^if)$ must vanish.
+
+Combining all the terms Eqs. (\ref{e.mom-zero-1} to \ref{e.mom-zero-3}) again, we arrive at a completely general conservation theorem:
+\begin{equation}
+  \frac{\partial}{\partial t} (n\langle Q \rangle) + \frac{\partial}{\partial x^i} (n\langle Qv^i\rangle) - n\left[ \left\langle\frac{\partial Q}{\partial t}\right\rangle + \left\langle v^i \frac{\partial Q}{\partial x^i}\right\rangle + \left\langle\frac{\partial(Qa^i)}{\partial v^i}\right\rangle \right] = 0,
+\end{equation}
+for any conserved physical quantity $Q$.
+We can simplify this expression is we assume that all external forces are velocity-independent and that $Q$ is a function of $\bvec{v}$ only (and not $\bvec{x}$ and $t$) then our conservation law is
+\begin{equation}
+  \frac{\partial}{\partial t} (n\langle Q \rangle) + \frac{\partial}{\partial x^i} (n\langle Qv^i\rangle) - na^i\left\langle\frac{\partial Q}{\partial v^i}\right\rangle = 0.\label{e.conservation}
+\end{equation}
+
+Now for a gas without internal degrees of freedom in which to store energy, the physical quantities conserved in collisions are mass, momentum, and energy. And so we can construct a vector of conserved quantities
+\begin{equation}
+  \bvec{Q} = [m, mv_1, mv_2, mv_3, \tfrac{1}{2} mv^2]^T.
+\end{equation}
+Taking each of these quantities in turn in Eq. (\ref{e.conservation}) yields our usual equations of fluid dynamics.
+
+\newthought{The continuity equation} is somewhat obvious when $Q=m$ in Eq. (\ref{e.conservation}).
+This gives
+\[
+  \frac{\partial}{\partial t} (nm) + \frac{\partial}{\partial x^i} (nm\langle v^i\rangle) = 0.
+\]
+The mass density is just $\rho = nm$ and the mean, or bulk, velocity is $\langle v^i\rangle = u^i$ (Eq. \ref{e.avg-vel}), so we have
+\begin{equation}
+  \rho_{,t} + (\rho u^i)_{,i} = 0,
+\end{equation}
+in indicial notation.
+Recall that repeated indices imply summation\sidenote{Thanks, Einstein.} and so we recognize the second term on the LHS as the divergence of the mass flux $\rho u^i$.
+Therefore, back in vector notation,
+\[
+  \partial_{t}\rho + \divr(\rho\vu) = 0,
+\]
+which is precisely the continuity equation represent conservation of mass (Eq. \ref{e.mass-1}).
+
+\newthought{The momentum equation} is a bit more involved.
+Setting $\bvec{Q}=mv^i$ in Eq. (\ref{e.conservation}) gives
+\begin{equation}
+  (nm\langle v^i\rangle)_{,t} + (nm\langle v^i v^j\rangle)_{,j} - nma^j\delta^i_j = 0, \label{e.boltzmom}
+\end{equation}
+where we have used the Kroenecker delta to ensure that the external force term is only applied when $i=j$.
+Using the decomposition of the velocity into mean and random parts $\bvec{v} = \bvec{u} + \bvec{U}$ (Eq. \ref{e.vel-decomp}), and recalling that $\langle \bvec{U}\rangle=0$, we can rewrite the tensorial term as
+\begin{eqnarray}
+  nm\langle v^i v^j\rangle &=& \rho\langle(u^i + U^i)(u^j + U^j)\rangle = \rho(u^iu^j + u^i\langle U^j\rangle + u^j\langle U^i \rangle + \langle U^i U^j\rangle)\nonumber\\
+  &=& \rho u^i u^j + \rho\langle U^i U^j \rangle.
+\end{eqnarray}
+This is the {\it momentum flux density tensor}.
+Now define the {\it stress tensor} as
+\begin{equation}
+  T^{ij} \equiv -\rho \langle U^i U^j \rangle,
+\end{equation}
+meaning that {\it macroscopic} fluid stresses arise from momentum exchange at a {\it microscopic} level.
+With this, Eq. (\ref{e.boltzmom}) is now
+\begin{equation}
+  (\rho u^i)_{,t} + (\rho u^i u^j - T^{ij})_{,j} = \rho a^i,
+\end{equation}
+making the same substitutions we made above for the continuity equation.
+
+So what is the stress tensor?
+Well, by definition in fluid dynamics the {\it pressure} is the negative of the average of the normal stresses experience by the fluid. Or,
+\begin{equation}
+  P = -\tfrac{1}{3}T_{ii} = \tfrac{1}{3}\rho \langle U^2_x + U^2_y + U^2_z \rangle = \tfrac{1}{3}\rho \langle U^2 \rangle,
+\end{equation}
+where $\langle U^2 \rangle$ is the mean translational kinetic energy of the gas and is essentially the gas temperature (see below).
+So, in the absence of any {\it viscous} stresses, we can redefine the stress tensor in terms of the more familiar pressure as $T_{ij} = -P\delta_{ij}$, we can rewrite Eq. (\ref{e.boltzmom}) as
+\begin{equation}
+  (\rho u^i)_{,t} + (\rho u^i u^j + P\delta^{ij})_{,j} = \rho a^i,
+\end{equation}
+which is the same as Eq. (\ref{e.momentum-1}) if we take $a^i = \bvec{g} = -\nabla \Phi$.
+
+\newthought{The energy equation} is found by setting $Q=\tfrac{1}{2}mv^2$ making Eq. (\ref{e.boltzmom})
+\begin{equation}
+  (\tfrac{1}{2}nm\langle v^2 \rangle)_{,t} + (\tfrac{1}{2}nm\langle v^2 v^i\rangle)_{,j} = nma^i v_j. \label{e.energymoment}
+\end{equation}
+The mean-squared particle velocity is
+\begin{eqnarray}
+  \langle v^2 \rangle &=& \langle v_i v^i \rangle = \langle (u_i + U_i)(u^i+U^i)\rangle \nonumber\\
+  &=& u_i u^i + 2u_i\langle U^i\rangle + \langle U_i U^i\rangle = u^2 + \langle U^2 \rangle,
+\end{eqnarray}
+and
+\begin{eqnarray}
+  \langle v^2 v^i \rangle &=& \langle (u_i+U_i)(u^i+U^i)(u^j+U^j)\rangle \nonumber\\
+  &=& u_iu^i (u^i+\langle U^i\rangle) + u^i\langle U_iU^i\rangle + 2u^iu_i\langle U^i\rangle + 2u_i\langle U^i U^j\rangle + \langle U_iU^i U^j\rangle \nonumber\\
+  &=& u^i(u^2+\langle U^2\rangle) + 2u_i \langle U^i U^j\rangle + \langle U^2 U^j\rangle.
+\end{eqnarray}
+Substituting these expressions in Eq (\ref{e.energymoment}) we have
+\begin{equation}
+  [\rho(\tfrac{1}{2}\langle U^2\rangle + \tfrac{1}{2}u^2)]_{,t} + [\rho(\tfrac{1}{2}\langle U^2\rangle + \tfrac{1}{2}u^2)u^j + \rho u_i\langle U^i U^j\rangle + \rho \langle\tfrac{1}{2}U^2U^j\rangle]_{,j} = \rho u_j a^j.
+\end{equation}
+Considering each term in this equation we recognize that the specific internal energy of the gas is $\varepsilon = \tfrac{1}{2}\langle U^2\rangle$.
+As we identified above, the stress tensor is $\rho\langle U^i U^j\rangle = -T^{ij} = P \delta^{ij}$.
+Finally the {heat flux} \bvec{F} as
+\begin{equation}
+  \bvec{F} = \rho \langle\tfrac{1}{2}U^2 \bvec{U}\rangle,
+\end{equation}
+which is the energy flux in the gas resulting from microscopic particle motions.
+Thus we have
+\begin{equation}
+  (\rho \varepsilon + \tfrac{1}{2}\rho u^2)_{,t} + [\rho u^j(\varepsilon + \frac{P}{\rho}+\tfrac{1}{2}u^2) + F^j]_{,j} = \rho u_i g^i
+\end{equation}
+which is the same as Eq. (\ref{e.energy-2}) except neglecting the local source term $\rho q$ from, e.g., nuclear reactions.
+
+This approach to deriving the fluid equations is identical to constructing a hierarchy of moments of the Boltzmann equation in a completely analogous fashion to how we constructed moments of the distribution function to arrive at physical quantities such as the density, momentum, and stress in the previous section.
+Inspecting our resulting equations in light of the moment formalism, we see that each evolution equation depends on the next higher moment of the distribution function.
+For instance, the continuity equation, which is just an evolution equation for the mass density, depends on the divergence of the momentum density $\rho u^i$.
+Similarly, the momentum evolution equation depends on the divergence of the energy density $\rho u^i u^j$.
+This is a common feature of moment formalisms, requiring that the hierarchy be ``closed'' by some equation or equations that give the higher moments in terms of the lower moments which are being directly solved for.
+In the case of the fluid equations, this is achieved by an equation of the state which gives the pressure $P$ in terms of the the energy and density $\varepsilon,\ \rho$ (or any other two thermodynamic variables which we are solving for).
+Additionally, we supply an equation for solving for the heat flux $F$ [c.f. Eq. (\ref{e.conduction-simple})].
+
+% \subsection{Another Approach to Deriving the Fluid Equations}
+%
+% We can also recover the fluid evolution equations via a hierarchy of moments of the Boltzmann equation in an analogous manner to that we used to derive the mass density, momentum density, and stress tensor from moments of the distribution function. To begin, we will replace $f$ with the Boltzmann transport equation (Eq. \ref{e.BTE}) in the moment equation (\ref{e.moments}):
+% \begin{eqnarray}
+%   \mathrm{Moment}(\mathrm{BE},M) &=& m \int (v_i)^M \left[\frac{\partial f}{\partial t} + v^i\frac{\partial f}{\partial x^i} + a^i \frac{\partial f}{\partial v^i} \right ]\dif^3 v \nonumber \\
+%   &=& m \int (v_i)^M \left(\frac{\Dif f}{\Dif t}\right)_\mathrm{coll}\dif^3 v.\label{e.momBTE}
+% \end{eqnarray}
+% Since the first several moments form collisional invariants as coefficients ($m, mv_i, mv_iv_j$), we can again take the collision integral over velocity space to be zero. So for the zeroth-moment we have
+% \begin{equation}
+%   \int m \frac{\partial f}{\partial t} \dif^3 v + \int mv^i\frac{\partial f}{\partial x^i} \dif^3 v + \int ma^i \frac{\partial f}{\partial v^i} \dif^3 v = 0 \label{e.momsTerm1}
+% \end{equation}
+% For the first term on the LHS we have
+% \begin{eqnarray}
+%   \int m \frac{\partial f}{\partial t} \dif^3v &=& \partial_t \int mf\dif^3v - \int \frac{\partial m}{\partial t} f \dif^3 v \nonumber \\
+%   &=& \partial_t (n\langle m \rangle) = \dif_t \rho, \label{e.mom-zero-1a}
+% \end{eqnarray}
+% where we recognize that the time derivative of the particle mass $m$ is zero and its average $\langle m \rangle$ is just $m$.
+% The second term in Eq. (\ref{e.momsTerm1}) is
+% \begin{eqnarray}
+%   \int m v^i\frac{\partial f}{\partial x^i} \dif^3v &=& \frac{\partial}{\partial x^i} \int mv^if\dif^3v - \int v^i\frac{\partial m}{\partial x^i}f\dif^3v \nonumber \\
+%   &=& \frac{\partial}{\partial x^i} (nm\langle v^i\rangle) = \frac{\partial}{\partial x^i}(\rho v^i), \label{e.mom-zero-2a}
+% \end{eqnarray}
+% since the particle mass $m$ is a constant in space.
+% And the third term is
+% \begin{eqnarray}
+%     \int ma^i\frac{\partial f}{\partial v^i}\dif^3v &=& \int \frac{\partial (m a^i f)}{\partial v^i} \dif^3v - \int \frac{\partial (ma^i)}{\partial v^i} f\dif^3v \nonumber \\
+%     &=& \sum_i \int_{-\infty}^\infty \dif v_l \dif v_k \vert_{-\infty}^{\infty} (ma^if) - n\left\langle\frac{\partial(ma^i)}{\partial v^i}\right\rangle \nonumber \\
+%     &=& -n\left\langle\frac{\partial(ma^i)}{\partial v^i}\right\rangle = -\rho \left\langle\frac{\partial a^i}{\partial v^i}\right\rangle. \label{e.mom-zero-3a}
+% \end{eqnarray}
+% If we restrict ourselves to external forces that do not depend on the particle velocity (most physics forces of interest), then this third term is zero.
+% Thus, combining the first and second terms we have
+% \begin{equation}
+%   \dif_t \rho + \frac{\partial (\rho v^i)}{\partial x^i} = 0,
+% \end{equation}
+% which is just the continuity equation, Eq. (\ref{e.mass-1})!
+%
+% \newthought{The momentum equation} can be found by taking the first moment of the Boltzmann equation.
+% From Eq. (\ref{e.momBTE}) with $M=1$ we have
+% \begin{equation}
+%   \int m v^j \frac{\partial f}{\partial t} \dif^3 v + \int mv^iv^j\frac{\partial f}{\partial x^i} \dif^3 v + \int mv^ja^i \frac{\partial f}{\partial v^i} \dif^3 v = 0 \label{e.momsTerm2}
+% \end{equation}
+% Again, term-by-term, we have for the first term:
+% \begin{eqnarray}
+%   \int m v^j\frac{\partial f}{\partial t} \dif^3v &=& \partial_t \int mv^jf\dif^3v - \int m \frac{\partial v^j}{\partial t} f \dif^3 v \nonumber \\
+%   &=& \partial_t (n\langle mv^j \rangle) - nm\langle a^j \rangle = \partial_t (\rho u^j) - \rho a^j,
+% \end{eqnarray}
+% The second term:
+% \begin{eqnarray}
+%   \int m v^i v^j\frac{\partial f}{\partial x^i} \dif^3v &=& \frac{\partial}{\partial x^i} \int mv^iv^jf\dif^3v - \int mv^i\frac{\partial v^j}{\partial x^i}f\dif^3v - \int mv^j \frac{\partial v^i}{\partial x^i}f\dif^3v\nonumber \\
+%   &=& \frac{\partial}{\partial x^i} (nm\langle v^iv^j\rangle) - nm \langle v^i \frac{\partial v^j}{\partial x^i} \rangle - nm \langle v^j \frac{\partial v^i}{\partial x^i} \rangle \nonumber \\
+%   &=& \frac{\partial}{\partial x^i} (\rho u^iu^j + \rho\langle U^iU^j\rangle) - \rho \left\langle v^i \frac{\partial v^j}{\partial x^i} \right\rangle - \rho \left\langle v^j \frac{\partial v^i}{\partial x^i} \right\rangle
+% \end{eqnarray}
+% The third term:
+% \begin{eqnarray}
+%     \int mv^ja^i\frac{\partial f}{\partial v^i}\dif^3v &=& \frac{\partial}{\partial v^i} \int mv^j a^i f \dif^3 v - \int m \frac{\partial v^j}{\partial v^i} a^i f \dif^3 v \nonumber\\
+%     &-& \int mv^j \frac{\partial a^i}{\partial v^i} f \dif^3 v \nonumber\\
+%     &=& \frac{\partial}{\partial v^i} (m\langle v^j a^i\rangle)
+% \end{eqnarray}
+%
+%
+% \subsection{Derive ideal gas law}
