@@ -18,7 +18,7 @@ Let's consider the collapse of a homogeneous, isotropic fluid. Our equations are
 \end{eqnarray}
 Right away we run into a snag: if our system is homogenous and isotropic, then $\grad\Phi = 0$, since there is no preferred direction for the vector to point. In this case the left-hand side of Poisson's equation vanishes, which is inconsistent with our having a background density.  This, of course, is the central point to cosmology, and if we want to do this calculation correctly we need general relativity and an expanding background universe.
 
-Instead, we shall take an alternate route: following Jeans's lead, we simply assert that there is a background state of uniform density $\rho_{0}$. This not-quite-consistent approach still provides insight.
+Instead, we shall take an alternate route: following Jeans' lead, we simply assert that there is a background state of uniform density $\rho_{0}$. This is known as the Jeans Swindle \citep[c.f.,][]{binney:1987} and, while not quite consistent, still provides insight.
 Forging ahead, we write the density, velocity, and potential as a background piece (subscript ``0'') plus a perturbation (subscript ``1''):
 \begin{eqnarray*}
 \rho(\vx,t) &=& \rho_{0} + \rho_{1}\exp(i\bvec{k}\vdot\vx - i\omega t)\\
@@ -26,15 +26,55 @@ Forging ahead, we write the density, velocity, and potential as a background pie
 \Phi(\vx,t) &=& \Phi_{1}\exp(i\bvec{k}\vdot\vx - i\omega t).
 \end{eqnarray*}
 Here, $k$ is the wavenumber of the perturbations and has the usual relation to wavelength, $k = 2\pi/\lambda$.
-We take the perturbations to be adiabatic: $\dif P = c_{s}^{2}\dif\rho$. Substituting these into eqns.~(\ref{e.jeans-mass-cons})--(\ref{e.jeans-poisson}), dropping all terms that are higher than first order, dotting $\bvec{k}$ into the perturbed form of eq.~(\ref{e.jeans-momentum}) and using the other two equations to eliminate terms results in a dispersion relation,
-\begin{equation}\label{e.jeans-dispersion}
-\omega^{2} = c_{s}^{2}k^{2} - 4\pi G\rho_{0}.
+We take the perturbations to be adiabatic: $\dif P = c_{s}^{2}\dif\rho$.
+
+Re-writing Eq. (\ref{e.jeans-mass-cons}) in perturbed form gives,
+\newcommand{\expikx}{\ensuremath{e^{i\bvec{k}\cdot\bvec{x}-i\omega t}}}
+\newcommand{\expikxb}{\ensuremath{e^{i{k}{x}-i\omega t}}}
+\[ \partial_t (\rho_1 \expikx) + \nabla\cdot(\rho_0\bvec{u}_1\expikx + \rho_1\bvec{u}_1 \expikx)x.  \]
+We shall drop all terms higher than first order in the perturbation and so the second term in the divergence is zero.
+Furthermore, we shall pick a direction by dotting $\bvec{k}$ into the perturbed equations, yielding
+\[
+  -i\omega \rho_1 \expikxb + i k \rho_0 u_1 \expikxb = 0,
+\]
+or
+\begin{equation}
+  u_1 = \frac{\omega \rho_1}{k \rho_0}. \label{e.jeans1}
 \end{equation}
+Similarly, for Poisson's equation (\ref{e.jeans-poisson}) we have
+\[ \nabla^2 (\Phi_1 \expikx) = 4\pi G \rho_1\expikx, \]
+where we remember the Swindle and drop the dependence on $\rho_0$.
+Dotting by \bvec{k} and taking a couple spatial derivatives gives
+\[ -k^2 \Phi_1 \expikxb = 4\pi G \rho_1 \expikxb,  \]
+or
+\begin{equation}
+  \Phi_1 = -\frac{4\pi G}{k^2} \rho_1. \label{e.jeans2}
+\end{equation}
+Finally, for the momentum equation (\ref{e.jeans-momentum})
+\begin{eqnarray*}
+  \partial_t (\rho_0 \bvec{u}_1\expikx + \rho_1\expikx\bvec{u}_1\expikx) = \\
+  -\grad(c_s^2\rho_0 + c_s^2\rho_1\expikx) - (\rho_0+\rho_1\expikx)\grad(\Phi_1\expikx),
+\end{eqnarray*}
+where we have already dropped all terms in the divergence since they are all second order or higher and we have used the adiabatic relation for $P$.
+Dotting by $\bvec{k}$ and taking some derivatives, we have
+\begin{eqnarray*}
+ -i\omega\rho_0 u_1 \expikxb &=& -i k c_s^2\rho_1\expikxb - i\rho_0 k \Phi_1\expikxb \\
+ \omega\rho_0 u_1 &=& k c_s^2\rho_1 + \rho_0 k \Phi_1.
+\end{eqnarray*}
+Using Eqs. (\ref{e.jeans1}) and (\ref{e.jeans2}) to eliminate $u_1$ and $\Phi_1$ gives us
+\begin{eqnarray}
+  \omega^2\rho_1 &=& k^2 c_s^2\rho_1 - 4\pi G\rho_0 \rho_1 \nonumber\\
+  \omega^2 &=& k^2 c_s^2 - 4\pi G\rho_0. \label{e.jeans-dispersion}
+\end{eqnarray}
+
+Equation (\ref{e.jeans-dispersion}) is the {\it dispersion relation} for the Jeans instability.
 For sufficiently small $k$ (long wavelengths) $\omega^{2}<0$ and the perturbations will grow exponentially. Setting $\omega = 0$ defines the \textbf{Jeans' length},
 \begin{equation}\label{e.Jeans-length}
 \lambda_{\mathrm{J}} = c_{s}\sqrt{\frac{\pi}{G\rho_{0}}}.
 \end{equation}
-We recognize the right-hand side as just being $\sim c_{s} \tau_{\mathrm{dyn}}$: equation~(\ref{e.Jeans-length}) simply says that regions where the sound-crossing time are longer than the dynamical timescale are subject to collapse.  The mass contained in a box of size $\lambda_{\mathrm{J}}$ is $M_{\mathrm{J}} = c_{s}^{3}(\pi/G)^{3/2}/\rho^{1/2}$.
+We recognize the right-hand side as just being $\sim c_{s} \tau_{\mathrm{dyn}}$: equation~(\ref{e.Jeans-length}) simply says that regions where the sound-crossing time are longer than the dynamical timescale are subject to collapse.
+In other words, the {\it pressure} of the system cannot respond quickly enough to reestablish hydrostatic balance against gravity.
+The mass contained in a box of size $\lambda_{\mathrm{J}}$ is $M_{\mathrm{J}} = c_{s}^{3}(\pi/G)^{3/2}/\rho^{1/2}$.
 For conditions appropriate to the dense cores of molecular clouds---temperatures $\sim 10\nsp\K$, $\mathrm{H}_{2}$ densities $\sim 10^{3}\nsp\cm^{-3}$---the Jeans mass is $M_{\mathrm{J}} \sim 100\nsp\Msun$.
 
 \section{The Hayashi Track}\label{s.Hayashi}
