@@ -12,12 +12,11 @@ CHAPTERS = 	frontmatter \
 			radiation \
 			plasma \
 			atmosphere \
-			PMScontraction \
+			star-formation \
 			nuclear \
 			main-sequence \
 			post-main-sequence \
 			perturbations \
-			initial-mass-function \
 			binaries \
 			technical-notes \
 			prelim \
@@ -54,7 +53,7 @@ $(BASE).pdf: $(BASE).tex $(TEX_SRC) $(FIGURES) $(BIBS)
 	bibtex $(BASE).aux
 	$(COMPILE) $(OPS) $(BASE).tex
 	$(COMPILE) $(OPS) $(BASE).tex
-	
+
 quick: $(BASE).tex $(TEX_SRC) $(FIGURES) $(BIBS)
 	git rev-parse --short=8 HEAD > git-info.tex
 	$(COMPILE) $(OPS) $(BASE).tex
