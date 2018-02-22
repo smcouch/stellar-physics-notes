@@ -78,11 +78,80 @@ The mass contained in a box of size $\lambda_{\mathrm{J}}$ is
 \begin{equation}
   M_{\mathrm{J}} = c_{s}^{3} \sqrt{\frac{\pi^3}{G^3\rho}}
   = \sqrt{\frac{\pi^3 \kB^3 }{G^3 \mb^4}} \sqrt{\frac{T^3}{\mu^4 n}}
-  \approx 100\ \Msun  \sqrt{\frac{T^3}{\mu^4 n}},
+  \approx 100\ \Msun  \sqrt{\frac{T^3}{\mu^4 n}},\label{e.jeans-mass}
 \end{equation}
 where\sidenote{Molecular clouds in the ISM are approximately isothermal.} $c_s^2=P/\rho$, $P=n\kB T$, and $\rho=\mu \mb n$.
 The last approximate equality holds for conditions appropriate to the dense cores of molecular clouds---temperatures $\sim 10\nsp\K$, $\mathrm{H}_{2}$ densities $\sim 10^{3}\nsp\cm^{-3}$.\sidenote{Yeah, we kinda ignored the fact that $\mu=2$ for $\mathrm{H}_{2}$ but, hey, we also ignored a factor of $4\pi/3$ by pretending that it was a collapsing {\it cube} rather than {\it sphere}, so...}
-Thus, the typical mass of gravitationally collapsing cores in molecular clouds is about 100 \Msun. Typical giant molecular clouds in the disk of the Milky Way have masses of $10^6$ to $10^7$ \Msun. 
+Thus, the typical mass of gravitationally collapsing cores in molecular clouds is about 100 \Msun. Typical giant molecular clouds in the disk of the Milky Way have masses of $10^6$ to $10^7$ \Msun.
+
+\section{Collapse of Dense Cores: the Free-fall Phase}
+
+Once a cloud exceeds the Jeans' mass, collapse ensues on roughly the free-fall time scale,
+\[\tau_\mathrm{ff} = \sqrt{\frac{3\pi}{32 G\rho}} \approx \frac{5\times10^7\ \mathrm{yr}}{\sqrt{\mu n}}.\]
+For conditions appropriate to molecular clouds ($\mu=2$, $n=10^3$ g cm$^{-3}$) the free-fall time is about $10^6$ yr.
+If the cloud contracts adiabatically, the temperature will increase with the density. For the adiabatic contraction of an ideal gas, $P\sim\rho^{5/3}$ and $T\sim P/\rho$, so $T\sim \rho^{2/3}$.
+Plugging this scaling into the Jeans mass gives $M_J \sim \rho^{1/2}$.
+At some point, the cloud will no longer exceed its Jeans' mass, i.e., it will reach hydrostatic equilibrium.
+This would be a problem as no stars would ever form, and we wouldn't be here to ask why not.
+Fortunately, the collapse is {\it not} adiabatic.
+The collapsing clouds cool radiatively as they contract.
+
+\begin{figure}[htbp]
+  \includegraphics[width=4.5in]{star-formation/figs/eso9934b}
+  \caption{Barnard 68, a classic ``Bok globule.'' This turns out to be a stellar nursery, with the young stars embedded in an opaque (at optical wavelengths) shroud. William Herschel was the first astronomer to discover such ``nebulae'' as this one, upon which he exclaimed, ``My god! There's a hole in the sky!''}\label{f.bok}
+\end{figure}
+
+Molecular clouds are optically thick to visible and UV photons.
+Figure \ref{f.bok} shows images of a molecular cloud at various different wavelengths.
+At optical wavelengths, the cloud is clearly opaque, but at longer wavelengths into the IR, the cloud becomes transparent, revealing young stars embedded within.
+The cooling of such clouds is thus dominated by emission in the IR where the clouds are transparent.
+The main drivers of this cooling are emission by molecules and by dust.
+The cooling is sufficiently efficient that the collapse is essentially {\it isothermal}, occurring at roughly constant temperature throughout.
+This overcomes the increasing Jeans' mass catastrophe mentioned above, allowing the continued collapse of unstable clouds.
+
+\newthought{Fragmentation} of the molecular clouds occurs as they collapse.
+This happens since, for isothermal collapse, the Jeans' mass decreases as $\rho^{-1/2}$ and so smaller overdensities become Jeans unstable and collapse within the overall collapsing cloud. That is, the Jeans {\it length} decreases faster than the overall size of the cloud.
+Smaller and smaller fragments collapse faster and faster leading to a hierarchical breakup of the overall cloud and a distribution of so-called {\it clump} masses.
+These clumps will become protostars and, eventually, stars proper.
+Fragmentation of molecular clouds occurs down to a minimum mass of about 0.01 \Msun.
+
+Collapse clumps eventually become stars, but this process is rather inefficient.
+Massive stars form first (because more massive clumps have shorter free-fall times, and well, every other time scale is also short!).
+The winds and ultimate explosions of these stars drive gas out of star forming regions.
+Roughly, only about 10\% of the original mass of a giant molecular cloud makes it into newborn stars.
+
+\begin{exercisebox}[The minimum mass of stars.]
+  In this exercise you will show that the minimum mass of a star collapsing via the Jeans instability is
+  \begin{equation}
+    M_\mathrm{min} \approx 10^{-2}\ \Msun. \label{e.min-jeans-mass}
+  \end{equation}
+  As discussed above, in order for a clump to continue collapsing, it must be able to radiate away the liberated gravitational binding energy, at a minimum. In other words,
+  \[L_\mathrm{clump} > -\frac{\dif E_\mathrm{grav}}{\dif t}.\]
+  The cooling will become inefficient was the clump is sufficiently dense to be optically thick to IR photons, at which point it will radiate like a black body (that's a {\it hint}).
+  Finally, since the clump being considered did in fact collapse, you may assume it is of at least the Jeans' mass (Eq. \ref{e.jeans-mass}).
+  Given all the above, show that the minimum clump mass that will gravitationally collapse is indeed Eq. (\ref{e.min-jeans-mass}).
+\end{exercisebox}
+
+\section{The End of Free-fall and the Birth of a Protostar}
+
+During the free-fall phase, a contracting clump remains transparent to the IR photons that dominate the cooling.
+Once the clump becomes sufficiently dense, however, it becomes opaque to the molecular cooling photons and the isothermal contraction turns to adiabatic contraction, at least for the inner core of the clump.
+This drives the temperature up ($T\sim\rho^{2/3}$).
+Eventually, the high temperatures will dissociate the H$_2$ molecules, robbing the core of its principle coolant, further exacerbating the increase in temperature.
+Ultimately, the atomic hydrogen is ionized.
+The temperature, and hence pressure, will rise enough to bring the clump into hydrostatic equilibrium, at which point we may consider it a {\it protostar}.
+
+We can estimate the conditions at the end of the free-fall phase by considering the energetics of H$_2$ dissociation and H ionization.
+Dissociating a H$_2$ molecule requires an energy $x_\mathrm{H2}=4.5$ eV while the ionization potential is $x_\mathrm{H}=13.6$ eV.\sidenote{Recall, 1 ev = $1.602\times10^{-12}$ erg.}
+So, assuming a hydrogen fraction $X=0.7$ and a helium fraction $Y=0.3$, the total energy to dissociate and ionize all the hydrogen in a clump is
+\begin{eqnarray*}
+  E_\mathrm{dis,ion} &=& \frac{M X}{\mb}(0.5x_\mathrm{H2} + x_\mathrm{H}) \\
+  &=& 1.3\times10^{58} \frac{M}{\Msun}\ \mathrm{eV} \approx 2\times10^{46} \frac{M}{\Msun}\ \mathrm{erg}.
+\end{eqnarray*}
+This energy is provided by released gravitational binding energy due to the collapse
+\begin{eqnarray*}
+  \Delta
+\end{eqnarray*}
 
 \section{The Hayashi Track}\label{s.Hayashi}
 
@@ -118,6 +187,17 @@ Note the extremely weak dependence on $R$.  This is a consequence that $R$ is ve
  \Teff \approx 2300\nsp\K \left(\frac{M}{\Msun}\right)^{7/51}\left(\frac{L}{L_{\odot}}\right)^{1/102}.
 \end{equation}
 This is a crude estimate, so don't take these numbers too seriously. What this exercise illustrates, however, is that the effective temperature for fully convective, low-mass stars is essentially independent of luminosity.  On an HR diagram, these stars follow a vertical track, known as the \emph{Hayashi track}, as they contract to the main sequence.
+
+\begin{figure}[htbp]
+  \includegraphics[width=4in]{star-formation/figs/hayashi}
+  \caption{Pre-main sequence tracks for stars of several different masses. The main sequence is represented by the dashed line.
+  The Hayashi tracks are the roughly vertical, constant temperature lines on the right while the radiative, protostar phases are the horizontal, constant luminosity lines.}\label{f.hayashi}
+\end{figure}
+
+The HR diagram in Figure \ref{f.hayashi} shows the pre-main sequence evolution for stars of various masses.
+The tracks begin in the upper right of the diagram.
+The Hayashi phase is the roughly vertical portion.
+
 
 \section{Formation of a radiative core}
 
@@ -173,6 +253,9 @@ Here $A_{0} = 0.158$, $A_{1} = 4.43\ee{-2}$, $m_{c} = 0.079$, $\sigma = 0.69$, a
  For the IMF given in eq.~(\ref{e.IMF-chabrier}), what fraction of the stars formed with $m > 1.0$ will end their lives as core-collapse supernovae, if the mass threshold for forming a core-collapse SNe is $8.0\nsp\Msun$?  What is the fraction if the mass threshold is $12.0\nsp\Msun$?
 \end{exercisebox}
 
+\begin{figure}[htbp]\caption{title}
+  \includegraphics[width=3in]{star-formation/figs/imf}
+\end{figure}
 The main-sequence lifetime is a rapidly decreasing function of mass: for $m > 1.0$, it goes roughly like $\tms \approx 10.0\nsp\Giga\yr\nsp m^{-2.5}$. For stars with lifetimes comparable to or longer than the age of the galactic disc $\tauG$, all stars that were ever formed are still on the main sequence, so that the IMF is identical to  the \emph{present day mass function} (PDMF) $\phi$.  For more massive stars, however, we only see those that were formed a time $\tms(m)$ ago.
 
 Let's define a birthrate $B(t)$ as the number of stars per unit volume formed per interval of time.  If we make the \emph{ansatz} that the IMF doesn't depend on time, then we can define a creation function,
