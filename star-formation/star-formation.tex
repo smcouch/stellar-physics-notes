@@ -141,6 +141,17 @@ Eventually, the high temperatures will dissociate the H$_2$ molecules, robbing t
 Ultimately, the atomic hydrogen is ionized.
 The temperature, and hence pressure, will rise enough to bring the clump into hydrostatic equilibrium, at which point we may consider it a {\it protostar}.
 
+Consider the free-fall collapse of a 1 \Msun clump.
+To find our initial conditions for this, we need to compute when the Jeans' mass is 1 \Msun (at which point such clumps with fragment out from the larger, collapsing giant molecular cloud).
+Assuming isothermal collapse up to this point, Eq. (\ref{e.jeans-mass}) tells us that 1 \Msun clumps will collapse when the density reaches about $10^6$ cm$^{-3}$.
+The free-fall time for such a clump is only about 35,000 yrs!
+In short order, then, this 1 \Msun clump will become dense enough to be opaque to the cooling IR photons.
+This happens at about a density of $10^{-13}$ g cm$^{-3} \sim 3\times10^{10}$ cm$^{-3}$.
+At which point, the clump has a radius $R_0 \sim 24,000\ \Rsun$.
+From this point on, the collapse will proceed somewhat adiabatically, and the temperature will increase.
+Eventually, the temperature will be high enough that the clump will reach hydrostatic equilibrium and the free-fall collapse will stop.
+The end of this phase is marked by core temperatures sufficiently high to dissociate H$_2$ molecules and fully ionize H atoms.
+
 We can estimate the conditions at the end of the free-fall phase by considering the energetics of H$_2$ dissociation and H ionization.
 Dissociating a H$_2$ molecule requires an energy $x_\mathrm{H2}=4.5$ eV while the ionization potential is $x_\mathrm{H}=13.6$ eV.\sidenote{Recall, 1 ev = $1.602\times10^{-12}$ erg.}
 So, assuming a hydrogen fraction $X=0.7$ and a helium fraction $Y=0.3$, the total energy to dissociate and ionize all the hydrogen in a clump is
@@ -148,12 +159,43 @@ So, assuming a hydrogen fraction $X=0.7$ and a helium fraction $Y=0.3$, the tota
   E_\mathrm{dis,ion} &=& \frac{M X}{\mb}(0.5x_\mathrm{H2} + x_\mathrm{H}) \\
   &=& 1.3\times10^{58} \frac{M}{\Msun}\ \mathrm{eV} \approx 2\times10^{46} \frac{M}{\Msun}\ \mathrm{erg}.
 \end{eqnarray*}
-This energy is provided by released gravitational binding energy due to the collapse
+This energy is provided by released gravitational binding energy due to the collapse, which for an $n=2$ polytrope\sidenote{Simply for convenience.} is
 \begin{eqnarray*}
-  \Delta
+  \Delta E_\mathrm{grav} \approx G M^2 \left (\frac{1}{R} - \frac{1}{R_0}\right) \approx \frac{G M^2}{R} \sim 4\times10^{48} \frac{(M/\Msun)^2}{R/\Rsun}\ \mathrm{erg},
 \end{eqnarray*}
+where we have assumed $R_0 \sim \infty$.
+
+We can now solve for the final radius $R$ at which the clump will be hot enough to fully dissociate and ionize the H, but we must account for the fact that not all of the liberated gravitational binding energy will go into heating the gas.
+A large fraction will be radiated away.
+If we assume the clump contracts slowly enough from this point on to be in rough virial equilibrium, then this fraction will be 0.5.
+Thus, we have
+\begin{eqnarray}
+  0.5 \Delta E_\mathrm{grav} &=& E_\mathrm{dis,ion} \nonumber\\
+  2\times10^{48} \frac{(M/\Msun)^2}{R/\Rsun}\ \mathrm{erg} &=& 2\times10^{46} \frac{M}{\Msun}\ \mathrm{erg} \nonumber\\
+  \Rightarrow \frac{R}{\Rsun} &\sim& 100\frac{M}{\Msun}.\label{e.proto-rad}
+\end{eqnarray}
+So our 1 \Msun\ protostar has quite a long way to go yet before it looks like the Sun!
+
+To estimate the temperature of the protostar we will once again appeal to an $n=2$ polytrope.
+From Eq. (\ref{e.LE-TC}), with the appropriate numerical values from Table \ref{t.LE-properties}, we have
+\begin{equation}
+  T_c \approx \left(\frac{\mu}{\NA\kB}\right) \left(\frac{GM}{2R}\right)
+  \approx 5\times10^6\ \mathrm{K}\ \frac{M/\Msun}{R/\Rsun}.
+\end{equation}
+For our 1 \Msun\ clump with $R\sim100\ \Rsun$, this gives $T_c \sim 5\times10^4$ K.
+Not hot enough for fusion of any kind!
+The mean density of a 1 \Msun\ protostar at the end of the free-fall phase is $\sim10^{-6}$ g cm$^{-3} \sim 6\times10^{17} \grampercc$.
+A good estimate for the total time spent in the free-fall phase is to assume the free-fall time with the geometric mean of the initial critical density ($10^3\grampercc$ for the GMC) and the final critical density ($10^6\grampercc$ for a 1 \Msun\ clump).
+This yields
+\[ \tau_\mathrm{ff} \approx 200,000\ \mathrm{yr}\].
+
 
 \section{The Hayashi Track}\label{s.Hayashi}
+
+Under the conditions at the end of the free-fall phase ($\rho\sim10^{-6}$ g cm$^{-3}$ and $T\sim5\times10^4$ K), the total opacity will be $\kappa \sim 10^3$ cm$^{2}$ g$^{-1}$ (see Figure \ref{f.total-opac}).
+This is opaque enough that the protostar is fully convective.
+Since the protostar is in rough hydrostatic equilibrium, it will evolve on the Kelvin-Helmholtz timescale, $\tau_\mathrm{KH} \sim E_\mathrm{grav}/L$.
+Now, let's estimate the luminosity of the protostar, for which will need the effective temperature.
 
 For a fully convective star, we can use the fact that the entropy per unit mass is the same at the photosphere as at the center to relate the surface temperature to the mass and radius of the star. Namely,
 \begin{equation}\label{e.Teff-adiabat}
@@ -161,14 +203,34 @@ For a fully convective star, we can use the fact that the entropy per unit mass 
 \end{equation}
 with
 \begin{eqnarray}
-T_{c} &=& 0.5 \frac{GM\mu \mb}{kR} \label{e.fc-Tc}\\
+T_{c} &=& 0.5 \frac{GM\mu \mb}{\kB R} \label{e.fc-Tc}\\
 P_{c} &=& 0.8\frac{GM^{2}}{R^{4}} \label{e.fc-Pc}
 \end{eqnarray}
-being the central density and pressure of a polytrope of index $n=3/2$, and $P_{\mathrm{ph}}$ being the root of the equation
-\begin{equation}\label{e.pph}
- P_{\mathrm{ph}} \approx \frac{GM}{R^{2}}\frac{1}{\kappa_{0}(\mu\mb/k)^{r}P_{\mathrm{ph}}^{r}\Teff^{s-r}}.
+being the central density and pressure of a polytrope of index $n=3/2$ (Eqs. \ref{e.LE-TC} and \ref{e.LE-PC}).
+We can estimate the pressure at the photosphere, defined as the location where the optical depth $\tau \approx 1$, by rewriting the definition of optical depth (Eq. \ref{e.optical-depth-def}) as a differential equation,
+\begin{equation}
+  \frac{\dif \tau}{\dif z} = -\rho \kappa,
 \end{equation}
-(We could have used the solution for $P(\tau)$ from before, but this approximation is accurate enough to demonstrate our point.)
+with $\kappa$ being the total opacity.
+Using the equation of hydrostatic equilibrium to eliminate $\rho$
+\begin{equation}
+  \frac{\dif \tau}{\dif z} = \frac{\kappa \dif P}{g \dif z}.
+\end{equation}
+This is pretty easy to integrate.
+Doing so, and setting $\tau=1$, we find an approximate expression for the pressure at the photosphere
+\begin{equation}
+  P_\mathrm{ph} = \frac{g}{\kappa}.
+\end{equation}
+We write a general expression for a complicated total opacity that depends on both density and temperature as
+\begin{equation}
+  \kappa = \kappa_0 \rho^{r} T^{s}.
+\end{equation}
+Substituting this into our expression for $P_\mathrm{ph}$, and eliminating the density by assuming an ideal gas law, we find a transcendental equation for the pressure at the photosphere
+\begin{eqnarray}\label{e.pph}
+  P_{\mathrm{ph}} &\approx& \frac{GM}{R^{2}}\frac{1}{\kappa_{0}(\mu\mb/\kB)^{r}P_{\mathrm{ph}}^{r}\Teff^{s-r}}\nonumber\\
+  P_{\mathrm{ph}} &\approx& \left[GM R^{-2} \kappa_{0}^{-1} (\mu\mb/\kB)^{-r}\Teff^{r-s} \right]^{\frac{1}{r+1}}.
+\end{eqnarray}
+
 
 Now for some crazy fractions: insert equations~(\ref{e.fc-Tc}), (\ref{e.fc-Pc}), and (\ref{e.pph}) into equation~(\ref{e.Teff-adiabat}) and solve for $\Teff$ to find
 \begin{equation}\label{e.Teff-MR}
@@ -197,6 +259,40 @@ This is a crude estimate, so don't take these numbers too seriously. What this e
 The HR diagram in Figure \ref{f.hayashi} shows the pre-main sequence evolution for stars of various masses.
 The tracks begin in the upper right of the diagram.
 The Hayashi phase is the roughly vertical portion.
+
+The time a protostar will spend on the Hayashi track is given by the Kelvin-Helmholtz time.
+Now that we know the effective temperature and the radius (Eq. \ref{e.proto-rad}), we can find the luminosity
+\begin{eqnarray*}
+  L &=& 4\pi R^2 \sigma_\mathrm{SB} T_\mathrm{eff}^4 \\
+    &=& 10^{36} \mathrm{erg s^{-1}}\ (M/\Msun)^{130/49} \approx 250\ \Lsun\ (M/\Msun)^{130/49}.
+\end{eqnarray*}
+This is the luminosity at the {\it beginning} of the Hayashi phase.
+The radius will decrease as the star cools, dropping the luminosity drastically.
+This phase will end when the star is no longer fully convective.
+That is, when the opacity has dropped sufficiently that the energy transport can be accomplished by radiation.
+This should be the case when the mean temperature $\langle T\rangle$ has risen to about $3\times10^6$ K (see Fig. \ref{f.total-opac}).
+Since the protostar is in approximate hydrostatic balance, we can apply the virial theorem to find the radius at which the mean temperature has thus,
+\begin{eqnarray}
+  \frac{3}{2}\frac{M}{\mu \mb} \kB \langle T\rangle = \frac{1}{2}\frac{GM^2}{R}\nonumber\\
+  \Rightarrow R \approx \frac{\mu \mb}{\kB}\frac{GM}{3\langle T\rangle}.
+\end{eqnarray}
+So for $\langle T\rangle = 3\times10^6$ K,
+\begin{equation}
+  R \sim 4\Rsun \frac{M}{\Msun}.
+\end{equation}
+
+The mean luminosity of a protostar on the Hayashi track can be approximated using the geometric mean radius during the contraction, keeping the effective temperature fixed.
+So
+\[ \langle R\rangle \sim \sqrt{100\ \Rsun \times 4\ \Rsun}\frac{M}{\Msun} \sim 20\ \Rsun\frac{M}{\Msun}.\]
+Rounding up a bit and taking $T_\mathrm{eff}\sim3000$ K, the mean luminosity is
+\[\langle L \rangle \approx 4\pi\langle R\rangle^2 \sigma_\mathrm{SB} T_\mathrm{eff}^4 \approx 10^{35}\ \mathrm{erg\ s^{-1}}\ \left(\frac{M}{\Msun}\right)^2\approx 26 \Lsun \left(\frac{M}{\Msun}\right)^2. \]
+Thus the Kelvin-Helmholtz time for a protostar on the Hayashi track is
+\begin{eqnarray}
+  \tau_\mathrm{KH} &=& \frac{-\Delta E_\mathrm{grav}}{L} \approx \frac{2GM^2}{R\langle L\rangle}\nonumber\\
+  &\approx& \frac{2GM^2}{100\ \Rsun (M/\Msun) \times 10^{35}\ \mathrm{erg\ s^{-1}}\ (M/\Msun)^2}\nonumber\\
+  &\approx& 10^6\ \mathrm{yr}\ \left(\frac{M}{\Msun}\right)^{-1}.
+\end{eqnarray}
+We rounded up a bit on the gravitational energy as the protostar becomes more and more centrally concentrated, but this estimate gives good agreement with the observed values.
 
 
 \section{Formation of a radiative core}
