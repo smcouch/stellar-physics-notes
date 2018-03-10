@@ -273,23 +273,24 @@ That is, when the opacity has dropped sufficiently that the energy transport can
 This should be the case when the mean temperature $\langle T\rangle$ has risen to about $3\times10^6$ K (see Fig. \ref{f.total-opac}).
 Since the protostar is in approximate hydrostatic balance, we can apply the virial theorem to find the radius at which the mean temperature has thus,
 \begin{eqnarray}
-  \frac{3}{2}\frac{M}{\mu \mb} \kB \langle T\rangle = \frac{1}{2}\frac{GM^2}{R}\nonumber\\
-  \Rightarrow R \approx \frac{\mu \mb}{\kB}\frac{GM}{3\langle T\rangle}.
+  \frac{3}{2}\frac{M}{\mu \mb} \kB \langle T\rangle = \frac{GM^2}{R}\nonumber\\
+  \Rightarrow R \approx \frac{\mu \mb}{\kB}\frac{2GM}{3\langle T\rangle}.
 \end{eqnarray}
 So for $\langle T\rangle = 3\times10^6$ K,
 \begin{equation}
-  R \sim 4\Rsun \frac{M}{\Msun}.
+  R_\mathrm{PMS} \sim 2\Rsun \frac{M}{\Msun},
 \end{equation}
+where we have labeled this as the ``pre-main sequence'' radius.
 
 The mean luminosity of a protostar on the Hayashi track can be approximated using the geometric mean radius during the contraction, keeping the effective temperature fixed.
 So
-\[ \langle R\rangle \sim \sqrt{100\ \Rsun \times 4\ \Rsun}\frac{M}{\Msun} \sim 20\ \Rsun\frac{M}{\Msun}.\]
+\[ \langle R\rangle \sim \sqrt{100\ \Rsun \times 4\ \Rsun}\frac{M}{\Msun} \sim 14\ \Rsun\frac{M}{\Msun}.\]
 Rounding up a bit and taking $T_\mathrm{eff}\sim3000$ K, the mean luminosity is
-\[\langle L \rangle \approx 4\pi\langle R\rangle^2 \sigma_\mathrm{SB} T_\mathrm{eff}^4 \approx 10^{35}\ \mathrm{erg\ s^{-1}}\ \left(\frac{M}{\Msun}\right)^2\approx 26 \Lsun \left(\frac{M}{\Msun}\right)^2. \]
+\[\langle L \rangle \approx 4\pi\langle R\rangle^2 \sigma_\mathrm{SB} T_\mathrm{eff}^4 \approx 5\times10^{34}\ \mathrm{erg\ s^{-1}}\ \left(\frac{M}{\Msun}\right)^2\approx 13 \Lsun \left(\frac{M}{\Msun}\right)^2. \]
 Thus the Kelvin-Helmholtz time for a protostar on the Hayashi track is
 \begin{eqnarray}
-  \tau_\mathrm{KH} &=& \frac{-\Delta E_\mathrm{grav}}{L} \approx \frac{2GM^2}{R\langle L\rangle}\nonumber\\
-  &\approx& \frac{2GM^2}{100\ \Rsun (M/\Msun) \times 10^{35}\ \mathrm{erg\ s^{-1}}\ (M/\Msun)^2}\nonumber\\
+  \tau_\mathrm{KH} &=& \frac{-0.5\Delta E_\mathrm{grav}}{L} \approx \frac{GM^2}{R\langle L\rangle}\nonumber\\
+  &\approx& \frac{GM^2}{100\ \Rsun (M/\Msun) \times 13\ \Lsun\ \mathrm{erg\ s^{-1}}\ (M/\Msun)^2}\nonumber\\
   &\approx& 10^6\ \mathrm{yr}\ \left(\frac{M}{\Msun}\right)^{-1}.
 \end{eqnarray}
 We rounded up a bit on the gravitational energy as the protostar becomes more and more centrally concentrated, but this estimate gives good agreement with the observed values.
@@ -298,6 +299,7 @@ We rounded up a bit on the gravitational energy as the protostar becomes more an
 \section{Formation of a radiative core}
 
 For low-mass stars, the opacity in the core has a Kramers'-like form, $\kappa \propto \rho T^{-7/2}$. From our scalings, we see that $\kappa \propto M^{-5/2} R^{1/2}$.  As a result, as the star contracts, the central opacity decreases.  If it decreases enough, then photons can carry the flux and a radiative core will develop.
+This marks the end of the Hayashi phase.
 
 To find out when a radiative core forms, let's start with our equation for the flux,
 \[ F(r) = -\frac{1}{3}\frac{c}{\rho\kappa}\frac{\dif aT^{4}}{\dif r}, \]
@@ -328,6 +330,44 @@ We showed that low-mass pre-main-sequence stars (including brown dwarfs) are ful
 %\item Using appropriate expressions for the central density and temperature, calculate the time required for a star just below the hydrogen burning limit (about $0.07\nsp\Msun$) to contract to a radius such that $\eF(\rho_{c}) = \kB T_{c}$, where $\eF$ is the Fermi energy, and compare with the evolutionary tracks in Chabrier \& Baraffe.
 \end{enumerate}
 \end{exercisebox}
+
+During the radiative phase, the central temperatures are still not high enough to start H fusion.
+Using a similar estimate as above for the central temperature we find $T_c \sim 6\times10^6$ K.
+Close but not quite (H fusion kicks in around $10^7$ K).
+Thus, the stars luminosity is still powered by gravitational contraction.
+And, since the star is fully radiative, it will evolve with roughly constant luminosity as it contracts.
+This is shown as the roughly horizontal lines in Figure \ref{f.hayashi}.
+
+We can estimate the time spent in the radiative pre-main sequence (PMS) phase by again using the Kelvin-Helmholtz time.
+The final radius will be the main sequence radius, which we will show in a later chapter scales with mass like
+\[R_\mathrm{MS} \approx \Rsun \left(\frac{M}{\Msun}\right)^{0.7}.\]
+Assuming a constant luminosity fixed at the {\it final} luminosity from the Hayashi phase, we have
+\begin{eqnarray}
+  \tau_\mathrm{PMS} &\approx& \frac{-0.5\Delta E_\mathrm{grav}}{L_\mathrm{PMS}}
+  \approx \frac{G M^2}{4\pi R_\mathrm{PMS}^2 \sigma_\mathrm{SB} T_\mathrm{eff,PMS}^4} \left (\frac{1}{R_\mathrm{MS}} - \frac{1}{R_\mathrm{PMS}}\right) \nonumber\\
+  &\approx& \frac{G M^2}{10^{33}\ \mathrm{erg\ s^{-1}} (M/\Msun)^2} \Rsun^{-1} \left [\left(\frac{M}{\Msun}\right)^{-0.7} - 0.5\left(\frac{M}{\Msun}\right)^{-1}\right]\nonumber\\
+  &\approx& 10^8\ \mathrm{yr}\ \left [\left(\frac{M}{\Msun}\right)^{-0.7} - 0.5\left(\frac{M}{\Msun}\right)^{-1}\right].
+\end{eqnarray}
+This scaling is really only very accurate around 1 \Msun.
+It breaks down, in particular, for massive stars which spend far less time in the PMS phase than this scaling implies ($10^5$ vs. $10^7$ years).
+
+\newthought{Observed pre-main sequence stars} are identified as two different types of objects: {\it T Tauri} stars for low-mass objects ($M\lesssim2\Msun$) and {\it Herbig Ae-Be stars} for high-mass objects ($M\gtrsim2\Msun$).
+Herbig Ae-Be stars will end up as A and B stars on the main sequence and are characterized by the presence of strong emission lines coming from the accretion disk around the protostar.
+O stars evolve so quickly through the PMS phase they are rarely observed.
+
+T Tauri stars end up as F, G, and K stars on the main sequence.
+These stars are further separated into different classes based on their age:
+\begin{itemize}
+  \item Class 0: $\lesssim 10^4$ yr. Roughly spherical still. Far IR emission.
+  \item Class I: $\sim10^5$ yr. Embedded in thick disk with jets. Hayashi track.
+  \item Class II: $\sim10^6$ yr. Light from central ``star'' becomes visible as the disk becomes less opaque. On the constant-luminosity PMS track.
+  \item Class III: Weak emission lines. Emission stronger in the optical. Thin accretion disk. Near the main sequence.
+\end{itemize}
+
+\newthought{Hydrogen ignition} occurs when the central temperature exceeds about $6\times10^6$ K and the star joins the main sequence.
+Protostars with $M\lesssim0.08\ \Msun$ will never ignite H because these cores will become degenerate, halting collapse, prior to these temperatures being reached.
+These objects are called {\it brown dwarfs} and shine primarily in the IR, powered by the release of gravitational binding energy.
+
 
 \section{The Initial Mass Function}
 \newcommand{\tms}{\ensuremath{\tau_{\mathrm{MS}}}}
