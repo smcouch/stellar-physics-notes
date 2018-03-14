@@ -1,5 +1,97 @@
 % !TEX root = ../stellar-notes.tex
 
+The lives (and deaths) of stars are largely concerned with the history of the nuclear burning they undergo.
+Following the gravitational collapse of a protostar and the subsequent contraction to the main sequence (see Chapter \ref{ch.star-formation}), nuclear reactions involving the transmutation of H into He will provide sufficient energy input to balance the radiative luminosity from the stellar surface.
+The star will reach radiative and hydrostatic equilibrium. Or at least, nearly so.
+This phase, during which a star processes H into He, will the the longest of any phase of stellar evolution, lasting for the Sun some 10 Billion years.
+This time scale is quite accelerated for more massive stars as they consume their H fuel at incredibly rapid rates, as we shall see in subsequent chapters.
+
+In order understand how nuclear burning plays a key role in stellar evolution, we must develop some basic knowledge of nuclear physics and nuclear reactions.
+This then will provide the final key piece of the puzzle that is the equations of stellar structure (Chapter \ref{ch.equation-of-state}), the elusive local source term due to nuclear reactions $q$.
+We shall first describe the basic terminology and definition used to describe nuclear reactions.
+Then we will discuss the nuclear landscape and binding energies.
+We will then proceed to computing non-resonant reaction cross sections and rates.
+After that, we will discuss all important resonant reactions.
+Following a brief presentation of computing inverse reaction rates, we will proceed to how reaction rates need be modified to account for important plasma effects.
+Finally, we will discuss how all of these rates are folded into systems of differential equations describing the evolution of composition and attendant energy release.
+
+Many excellent and ``classic'' references are available on these topics that go into far greater detail than we will be able.
+Perhaps the most ``classic'' (yet still useful...) reference is \cite{Clayton1983Principles-of-S}.
+A good exposition of nuclear reactions and networks, and their role in stellar evolution, can be found in \cite{arnett:1996}.
+More modern, and slightly experimental, takes can be found in \cite{Iliadis2007Nuclear-Physics}.
+And the chapter on nuclear energy generation in \cite{Hansen2004Stellar-Interio} is also a useful summary of the key aspects.
+
+% \begin{enumerate}
+%   \item Need intro and overview with definitions and nomenclature.
+%   \item Need ignition masses, tie to deuterium burning/hydrogen burning and the end of pre-main sequence phase.
+%   \item How do we estimate $T_\mathrm{ign}$?
+%   \item More on S factor.
+%   \item ``Entrance'' channel ``Exit'' channel
+%   \item Branching ratios
+% \end{enumerate}
+
+\section{Nuclear Nomenclature}
+
+Consider a reaction that transmutes two bodies into some other two bodies,
+\[i + j \rightarrow k + l. \]
+For nuclear reactions we have two key constraints: charge conservation $Z_i + Z_j = Z_l + Z_k$, and baryon number conservation $A_i + A_j = A_l + A_k$.
+Reactions must also conserve lepton number, so we need to keep track of electrons, positrons, neutrinos, etc.
+We define the {\it reaction rate} $r_{ijkl}$ as the number of reactions per second per gram.
+The change in energy for the system due to a single such reaction is given by the {\it reaction $Q$-value},
+\begin{equation}
+  Q_{ijkl} = (m_i + m_j - m_k - m_l) c^2,
+\end{equation}
+where the term in parentheses is the relativistic change in mass, or {\it mass defect}, of the reaction.
+This corresponds to a change in binding energy amongst the nuclei involved.
+Finally, the total {\it energy generation rate} for a given reaction is
+\begin{equation}
+  \epsilon_{ijkl} = r_{ijkl} Q_{ijkl}.
+\end{equation}
+
+In nuclear astrophysics, we always consider any complex reaction to be the result of chains of two-body interactions.
+Three- and more-body interactions are...complicated.
+It is often the case that a give reaction will generate a short-lived, highly-excited compound nucleus that decays so quickly, we typically elide over it's very existence.
+For instance, the first step in the proton-proton chain, the primary nuclear fusion going on in the core of Sun, the first reaction is
+\[ \mathrm{^1H + ^1H \rightarrow ^2He + e^+} + \nu_e.\]
+But in fact, the two protons must first make a $^2$He nucleus.
+But this is an incredibly unstable nucleus and so must decay almostly instantly, either back into protons or to deuterium, $^2$H, by the emission of the a positron (and electron neutrino in order to conserve lepton number).
+
+It is common to write nuclear reactions using a shorthand notation, $X(\alpha, \beta)Y$, where the ``target'' nucleus is $X$, the ``projectile'' impacting the target is $\alpha$, and the final nuclear products are $Y$ and $\beta$.
+Thus, we would write the proton-proton interaction above as $^1$H($^1$H,e$^+$+$\nu_e$)$^2$He.
+
+Let's consider a more complex reaction, the creation of an excited \carbon nucleus.
+The first reaction is proton capture onto \boron
+\[ \pt + \boron \rightarrow \carbon^*.\]
+This first reaction leading to the excited nucleus is typically called the ``entrance channel'' for the reaction.
+This, then, is followed by the decay of the excited carbon nucleus via one of a number of reactions, or ``exit channels:''
+\begin{eqnarray*}
+  \carbon^* &\rightarrow& \carbon^{**} + \gamma \\
+            &\rightarrow& \boron + \pt \\
+            &\rightarrow& \carbon[11] + \nt \\
+            &\rightarrow& \nitrogen[12] + e^- + \bar{\nu}_e \\
+            &\rightarrow& \beryllium[8] + \alpha,\ \mathrm{etc.}
+\end{eqnarray*}
+The first reaction is simply the generation of some different excited state via the emission of a gamma-ray photon.
+Not all exit channels are equally likely.
+The probability that a given decay will occur can be computed by comparing the mean lifetimes for the given states, $\tau_i$.
+
+\begin{figure}[htbp]
+  \caption{Binding energy per nucleon.}\label{f.bindingE}
+  \includegraphics[width=3.5in]{nuclear/figs/bindingE}
+\end{figure}
+
+Computing the $Q$ value of a reaction involves comparison the change in binding energy or the the reactants or, equivalently, the mass defect of the reaction.
+Figure \ref{f.bindingE} shows the classic, experimentally derived binding energy per nucleon as a function of charge number $Z$.
+For example, consider the creation of \carbon via the {\it triple-$\alpha$} reaction,
+\[ 3 \helium \rightarrow \carbon. \]
+The binding energy per nucleon of the \helium nucleus is 7.074 MeV and that for \carbon is 7.680 MeV.
+We can compute the reaction $Q$ value then as
+\begin{eqnarray*}
+  Q_{3\alpha} &=& 3 \times [4\times (-7.1\ \mathrm{MeV})] - 12\times (-7.7\ \mathrm{MeV}) \\
+              &=& -85.2\ \mathrm{MeV} + 92.4\ \mathrm{MeV} = 7.2\ \mathrm{MeV}.
+\end{eqnarray*}
+
+
 \section{The Nuclear Landscape}
 
 From nucleon-nucleon scattering, we find that the nuclear force operates over a range of $\lesssim 2\ee{-13}\nsp\cm \equiv 2\nsp\fermi$, where $\fermi$ denotes the unit of length known as a ``fermi.''  At low energies the nuclear force can be described as the exchange of spin-zero pions; recall from quantum field theory that  the exchange of a spin-zero particle produces an attractive potential of the form $e^{-r/\lambda_{\pi}}/r$, where $\lambda_{\pi} = \hbar/(m_{\pi}c)$ is the Compton wavelength of the force carrier. The pion rest mass is $\approx 140\nsp\MeV/c^{2}$, so $\lambda_{\pi} \approx 1.4\nsp\fermi$.  The nuclear force is indeed attractive over this range,  but it becomes repulsive at distances $< 1\nsp\fermi$ where higher order terms in the interaction become important.
@@ -14,7 +106,7 @@ Such a model, due to Weiz\"acker, is
 \begin{equation}\label{e.weizacker-fmla}
 -B(N, Z) = a_{V} A + a_{S}A^{2/3} + a_{A}\frac{(N-Z)^{2}}{A} + a_{C}\frac{Z^{2}}{A^{1/3}} + a_{p}\delta A^{-1/2},
 \end{equation}
-and has five terms: a bulk energy term $a_{V}A$ that scales with the total number of nucleons; a surface term $a_{S}A^{2/3}$ that corrects for the weaker binding near the surface; an asymmetry term $a_{A}(N-Z)^{2}/A$ that accounts for the energy cost to have an imbalance in the number of neutrons and protons; and a Coulomb term $a_{C}Z^{2}/A^{1/3}$ that accounts for the repulsion between other protons.  
+and has five terms: a bulk energy term $a_{V}A$ that scales with the total number of nucleons; a surface term $a_{S}A^{2/3}$ that corrects for the weaker binding near the surface; an asymmetry term $a_{A}(N-Z)^{2}/A$ that accounts for the energy cost to have an imbalance in the number of neutrons and protons; and a Coulomb term $a_{C}Z^{2}/A^{1/3}$ that accounts for the repulsion between other protons.
  The final term accounts for the pairing between like nucleons, with
 \[
 \delta = \left\{\begin{array}{lr}+1,& \textrm{$N$, $Z$ even;} \\-1,& \textrm{$N$, $Z$ odd;} \\ 0,& \textrm{$N$ even, $Z$ odd, or $N$ odd, $Z$ even}\end{array}\right. .
@@ -59,10 +151,16 @@ S_{p}(N,Z) &\equiv& c^{2}\left\{\left[M(N,Z-1) + m_{p}\right] - M(N,Z)\right\} \
 	&=& B(N,Z) - B(N,Z-1).
 \end{eqnarray}
 If we take a nucleus $(N,Z)$ in the valley of stability and add protons keeping $N$ fixed, we will eventually reach a nucleus for which $S_{p} = 0$, that is, it costs no energy to add or to remove a proton.  This defines the \textbf{proton-drip line}: nuclei more proton-rich are unstable to proton emission. Likewise, on the neutron-rich side there is the \textbf{neutron-drip line}, for which $S_{n} = 0$. Note that because of the pairing term there is an odd-even staggering in the $S_{n}$ and $S_{p}$; it is therefore useful, sometimes, to define the two-neutron and two-proton separations energies $S_{2n}$ and $S_{2p}$.
+Figure \ref{f.landscape} shows an annotated nuclear landscape in neutron number and proton number space.
+
+\begin{figure}[htbp]
+  \caption{The Nuclear Landscape}\label{f.landscape}
+  \includegraphics[width=3.5in]{nuclear/figs/landscape}
+\end{figure}
 
 \begin{exercisebox}[The nuclear landscape]
 \begin{enumerate}
-\item 
+\item
 \begin{enumerate}
 \item For a fixed $A$, find $Z_\star(A)$ such that the binding energy per nucleon, $f = B(N=A-Z_{\star},Z_{\star})/A$ is maximized.
 \item\label{p.one} Plot $Z_{\star}$ vs $N$.
@@ -71,8 +169,8 @@ If we take a nucleus $(N,Z)$ in the valley of stability and add protons keeping 
 \end{enumerate}
 \item
 \begin{enumerate}
-\item\label{p.two} For each $10\le Z\le 82$, find the maximum value of $N$ such that $S_{2n}(N,Z) > 0$.  Plot the values $(N,Z)$ you find.  
-\item\label{p.three} For each $10\le N\le 120$, find the maximum value of $Z$ such that $S_{2p}(N,Z) > 0$. Plot the values $(N,Z)$ you find. 
+\item\label{p.two} For each $10\le Z\le 82$, find the maximum value of $N$ such that $S_{2n}(N,Z) > 0$.  Plot the values $(N,Z)$ you find.
+\item\label{p.three} For each $10\le N\le 120$, find the maximum value of $Z$ such that $S_{2p}(N,Z) > 0$. Plot the values $(N,Z)$ you find.
 \end{enumerate}
 
 \item Compare the plots of problems \ref{p.one}, \ref{p.two}, and \ref{p.three} to a chart of the nuclides.
@@ -87,13 +185,19 @@ The situation of interest is the reaction between two nuclei, $(A_{1},Z_{1})$ an
 \end{equation}
 For nuclear reactions, typical energy scales  are $\sim\MeV$ and typical length scales are $\sim\fermi$.  In these units, $\hbar c = 197 \nsp\MeV\usp\fermi$.  In the first equality in eq.~(\ref{e.cb}), we also introduce the fine-structure constant $\alpha = e^{2}/(\hbar c) = 1/137$. In ``nuclear units,'' $e^{2} = \alpha \hbar c = (197\nsp\MeV\usp\fermi)/137 = 1.44\nsp\MeV\usp\fermi$. Remember these numbers!  If we scatter two nuclei together, the closest approach (cf.~\S\ref{s.plasma-collisions}) is $\sim e^{2}/(\kB T) \sim 1440\nsp\fermi$ at typical stellar energies $\kB T \sim 1\nsp\keV$.
 Clearly the cross-section for a reaction between our pair of particles is controlled by the probability of tunneling through the Coulomb potential.
+The situation is illustrated in Figure \ref{f.barrier}.
+
+\begin{figure}[htbp]
+  \caption{The Coulomb barrier.}\label{f.barrier}
+  \includegraphics[width=3.5in]{nuclear/figs/potentialWell}
+\end{figure}
 
 For a two-body system, it is convenient to transform into a center-of-mass frame.  Our problem then reduces to a one-body problem with reduced mass $m = A\mb$, with $A=A_{1}A_{2}/(A_{1}+A_{2})$ and incident energy $E = m v^{2}/2$, where $v$ is the relative velocity of the two particles.  For now, we'll neglect angular momentum ($\ell = 0$) so our scattering is s-wave.
 At low energies, we can form a ``geometrical'' cross-section from the particle wavenumber $k = p/\hbar$, with
 \begin{equation}\label{e.geo}
 \pi k^{-2} = \pi\frac{\hbar^{2}}{(2mE)} = 660\nsp\barn\frac{1}{A}\left(\frac{\keV}{E}\right)
 \end{equation}
-Here the cross-section is in units of \emph{barns}, with $1\nsp\barn = 10^{-24}\nsp\cm^{2}$.  This is the first part of our nuclear cross-section $\sigma(E)$. 
+Here the cross-section is in units of \emph{barns}, with $1\nsp\barn = 10^{-24}\nsp\cm^{2}$.  This is the first part of our nuclear cross-section $\sigma(E)$.
 
 The second portion of the nuclear cross-section is the probability of tunneling through the Coulomb barrier.  First, let's get the classical turning point \re\ from
 \begin{eqnarray}
@@ -108,7 +212,7 @@ The WKB approximation is standard, so let me just remind you that the probabilit
 \end{equation}
 To do this integral, note that $\re\gg\rn$, so we can make the approximation $\rn\to 0$ in the integral's lower limit; with the substitution
 \[
-\sin\phi = \left[2m\left(\frac{Z_{1}Z_{2}e^{2}}{r}-E\right) \right]^{1/2} 
+\sin\phi = \left[2m\left(\frac{Z_{1}Z_{2}e^{2}}{r}-E\right) \right]^{1/2}
 	\left(\frac{r}{2mZ_{1}Z_{2}e^{2}}\right)^{1/2}
 \]
 we tame the integral and obtain
@@ -121,7 +225,7 @@ where
 \end{equation}
 is the \emph{Gamow energy}.  Note the strong dependence on $Z_{1}Z_{2}$: \EG\ determines which reactions can occur at a given temperature. If you stare at the factor multiplying the integral in equation~(\ref{e.prob}), you will see that $\mathcal{P}\propto \exp(-\re/\lambda)$, the exponential of ratio of the width of the forbidden region to the wavelength of the incident particle. This makes intuitive sense.
 
-Now we have the second part of our cross-section, the probability of getting through the Coulomb barrier.  This third part depends on the nuclear interactions.  For non-resonant reactions, this third part does not depend strongly on energy, so it is common to define the \emph{astrophysical S-factor} by writing the cross section as the product $(\textrm{geometrical})\times(\textrm{tunneling})\times(\textrm{nuclear})$, 
+Now we have the second part of our cross-section, the probability of getting through the Coulomb barrier.  This third part depends on the nuclear interactions.  For non-resonant reactions, this third part does not depend strongly on energy, so it is common to define the \emph{astrophysical S-factor} by writing the cross section as the product $(\textrm{geometrical})\times(\textrm{tunneling})\times(\textrm{nuclear})$,
 \begin{equation}\label{e.s-def}
 \sigma(E) = \frac{1}{E}\exp\left[-\left(\frac{\EG}{E}\right)^{1/2}\right] S(E).
 \end{equation}
@@ -131,7 +235,7 @@ Now each nucleus has a Maxwellian velocity distribution,
 \begin{equation}\label{e.maxwell}
 n_{1}(\bvec{v}_{1})\,\dif^{3}v = n_{1}\left(\frac{m_{1}}{2\pi kT}\right)^{3/2}\exp\left(-\frac{mv^{2}}{2kT}\right) \,\dif^{3}v,
 \end{equation}
-and similarly for particle 2.  Let's call a particular nucleus 1 (having velocity $\bvec{v}_{1}$) the target. By definition the cross section is 
+and similarly for particle 2.  Let's call a particular nucleus 1 (having velocity $\bvec{v}_{1}$) the target. By definition the cross section is
 \[ \frac{\textrm{number of reactions}/\textrm{target}/\textrm{time}}{\textrm{number of incident particles}/\textrm{area}/\textrm{time}},
 \]
 so to get the number of reactions per target per time we need to multiply $\sigma(E)$ by the number of incident particles per unit area per unit time.  The incident flux is just $n_{2}(\bvec{v}_{2})|\bvec{v}|\,\dif^{3}v_{2}$ where $\bvec{v}=\bvec{v}_{2}-\bvec{v}_{1}$.  Hence the reaction rate per unit volume per unit time between a pair of particles having velocities in volumes $\dif^{3}v_{1}$ and $\dif^{3}v_{2}$ about $\bvec{v}_{1}$ and $\bvec{v}_{2}$ is just
@@ -154,22 +258,22 @@ where $V$ is the center-of-mass velocity. It is straightforward to show that $\d
 &&\times \int\!\dif^{3}V \int\!\dif^{3}v \,\sigma(E)v \exp\left[-\frac{mv^{2}}{2kT}\right]
  \exp\left[-\frac{(m_{1}+m_{2})V^{2}}{2kT}\right].
 \end{eqnarray*}
-The integral over $\dif^{3}V$ can be factored out and is normalized to unity. Hence we have for the reaction rate between a pair of particles 1 and 2, 
+The integral over $\dif^{3}V$ can be factored out and is normalized to unity. Hence we have for the reaction rate between a pair of particles 1 and 2,
 \begin{eqnarray}\label{e.rate}
 r_{12} &=& \frac{1}{1+\delta_{12}}n_{1}n_{2}\left\{\left(\frac{m}{2\pi kT}\right)^{3/2}\int_{0}^{\infty}\! \sigma(E) v \exp\left(-\frac{mv^{2}}{2kT}\right)  4\pi v^{2}\,\dif v\right\}.\nonumber\\
  &\equiv& \frac{1}{1+\delta_{12}}n_{1}n_{2}\langle\sigma v\rangle.
 \end{eqnarray}
-The term in $\{\}$ is the averaging over the joint distribution of the cross-section times the velocity, and is usually denoted as $\langle\sigma v\rangle$. 
+The term in $\{\}$ is the averaging over the joint distribution of the cross-section times the velocity, and is usually denoted as $\langle\sigma v\rangle$.
 
 Changing variables to $E = mv^{2}/2$ in equation~(\ref{e.rate}) and inserting the formula for the cross-section, equation~(\ref{e.s-def}), gives
 \begin{equation}\label{e.integral}
 \langle\sigma v\rangle = \left(\frac{8}{\pi m}\right)^{1/2}\left(\frac{1}{kT}\right)^{3/2}\int_{0}^{\infty}\!S(E)\exp\left[-\left(\frac{\EG}{E}\right)^{1/2}-\frac{E}{kT}\right]\,\dif E.
 \end{equation}
-Now, we've assumed that $S(E)$ varies slowly; but look at the argument of the exponential. This is a competition between a rapidly rising term $\exp[-(\EG/E)^{1/2}]$ and a rapidly falling term $\exp(-E/kT)$. As a result, the exponential will have a strong peak, and we can expand the integrand in a Taylor series about the maximum. Let 
+Now, we've assumed that $S(E)$ varies slowly; but look at the argument of the exponential. This is a competition between a rapidly rising term $\exp[-(\EG/E)^{1/2}]$ and a rapidly falling term $\exp(-E/kT)$. As a result, the exponential will have a strong peak, and we can expand the integrand in a Taylor series about the maximum. Let
 \[
 f(E) = -\left(\frac{\EG}{E}\right)^{1/2} - \frac{E}{kT}.
 \]
-Then we can write 
+Then we can write
 \begin{eqnarray*}
 \lefteqn{\int_{0}^{\infty}\!S(E)\exp\left[-\left(\frac{\EG}{E}\right)^{1/2}-\frac{E}{kT}\right]\,\dif E}\\
 &\approx&
@@ -181,7 +285,7 @@ Solving for \Epk, we get
 \[
 \Epk = \frac{\EG^{1/3}(kT)^{2/3}}{2^{2/3}},
 \]
-and 
+and
 \[ \exp\left[f(\Epk)\right] = \exp\left[-3\left(\frac{\EG}{4kT}\right)^{1/3}\right].
 \]
 Further,
@@ -208,12 +312,12 @@ Another simplification can be made because both the Gaussian and the original in
 \langle\sigma v\rangle &\approx& \left(\frac{8}{\pi m}\right)^{1/2}\left(\frac{1}{kT}\right)^{3/2} S(\Epk) \exp\left[-3\left(\frac{\EG}{4kT}\right)^{1/3}\right]\frac{\Delta}{2}\nonumber\\
  &=& \frac{2^{13/6}}{\sqrt{3m}}\frac{\EG^{1/6}}{(kT)^{2/3}} \exp\left[-3\left(\frac{\EG}{4kT}\right)^{1/3}\right]  S(\Epk).
 \end{eqnarray}
-On to some numbers. Table~\ref{t.reaction} lists quantities for some common reactions. A couple of notes. First, $\Delta/\Epk$ indicates how well our Gaussian approximation works---you will see it is less than 1 in all cases. We evaluated $\Delta/\Epk$, which decreases with temperature as $T^{-1/6}$, at $T = 10^{7}\nsp\K$. Second, the quantity $n(T)$ is the exponent if we want to approximate the reaction rate as a power-law, $r\propto T^{n}$.  We compute this as 
+On to some numbers. Table~\ref{t.reaction} lists quantities for some common reactions. A couple of notes. First, $\Delta/\Epk$ indicates how well our Gaussian approximation works---you will see it is less than 1 in all cases. We evaluated $\Delta/\Epk$, which decreases with temperature as $T^{-1/6}$, at $T = 10^{7}\nsp\K$. Second, the quantity $n(T)$ is the exponent if we want to approximate the reaction rate as a power-law, $r\propto T^{n}$.  We compute this as
 \begin{equation}\label{e.exponent}
  n(T) = \frac{\dif\ln r}{\dif\ln T} = -\frac{2}{3} + \left(\frac{\EG}{4kT}\right)^{1/3},
  \end{equation}
  as you can easily verify for yourself. In the table, the exponent is evaluated at $T = 10^{7}\nsp\K$; obviously $n$ depends on temperature. Finally, note the size of $\EG/(4k)$.  This makes the argument of the exponential in equation~(\ref{e.rate2}) large in absolute value, and sets the temperature scale at which a given reaction comes into play.
- 
+
 \begin{table}[htbp]
 \caption{\label{t.reaction} Parameters for non-resonant reactions}
 \begin{center}
@@ -244,7 +348,7 @@ $n(T = 10^{7}\nsp\K)$ & 4.6 & 8.8 & 18.3 & 12.4 & 20.5\\
 This section contains my condensed notes on resonances following Blatt and Weisskopf's excellent text\cite{Blatt1979Theoretical-Nuc}.  Other treatments of the subject, such as that in Iliadis\cite{Iliadis2007Nuclear-Physics} and in Clayton\cite{Clayton1983Principles-of-S}, mostly follow their approach. In this section, we shall often make use of the notation $X(a,b)Y$ to mean the reaction $X + a \to b + Y$.
 
 \subsection{Orbitals}
-Nuclei exhibit shell effects: one can often treat the nucleons as independent particles occupying orbitals determined by a mean force.  Unlike in the atomic case, the spin-orbit term in the Hamiltonian, $-a\bvec{L}\vdot\bvec{S}$, is quite strong. Since the total angular momentum is $\bvec{J}=\bvec{L}+\bvec{S}$, we have 
+Nuclei exhibit shell effects: one can often treat the nucleons as independent particles occupying orbitals determined by a mean force.  Unlike in the atomic case, the spin-orbit term in the Hamiltonian, $-a\bvec{L}\vdot\bvec{S}$, is quite strong. Since the total angular momentum is $\bvec{J}=\bvec{L}+\bvec{S}$, we have
 \[
 \bvec{L}\vdot\bvec{S} = \frac{1}{2}\left(\bvec{J}\vdot\bvec{J} - \bvec{L}\vdot\bvec{L} - \bvec{S}\vdot\bvec{S}\right),
 \]
@@ -289,7 +393,7 @@ Even orbitals with positive energy can be long-lived; suppose we excite a proton
 \[
  \frac{P}{\tau} \sim \frac{\hbar}{D\tau} = \frac{\Gamma}{D} \ll 1,
 \]
-where the width of the state to particle emission is $\Gamma = \hbar/\tau$.  Hence for reactions at low excitation energies involving light nuclei with widely separated levels, we can look at captures into discrete levels in the compound nucleus. 
+where the width of the state to particle emission is $\Gamma = \hbar/\tau$.  Hence for reactions at low excitation energies involving light nuclei with widely separated levels, we can look at captures into discrete levels in the compound nucleus.
 
 \subsection{Derivation of resonant cross-section}\label{s.resonant-cross-section}
 We're now ready to do some heavy lifting and derive the cross-section for a resonant reaction.  The nuclear force is short-ranged, so we can define a ``channel radius'' $R$ exterior to which our potential is purely Coulomb. Our strategy is just like doing transmission resonances in quantum mechanics: we'll solve for the wave function exterior to $R$ and match it to the wave function inside $R$.  Since we don't completely know the form of the potential inside $R$, our expression will have terms that must be experimentally constrained.
@@ -302,7 +406,7 @@ gives the following equation for $u_{\ell}$,
 \[
 \frac{\dif^{2}}{\dif r^{2}} u_{\ell} + \left\{ k^{2} - \frac{\ell(\ell + 1)}{r^{2}} - \frac{2m}{\hbar^{2}}\frac{Z_{a}Z_{X}e^{2}}{r} \right\}u_{\ell} = 0.
 \]
-Here $k$ is the wavenumber for the particle at $r\to\infty$, $E = \hbar^{2}k^{2}/2m$. There are two solutions to this differential equation; the solutions are known as Coulomb wave functions, $F_{\ell}$ and $G_{\ell}$.  The regular solution $F_{\ell}$ vanishes as $r\to 0$, and $G_{\ell}$ blows up at the origin. 
+Here $k$ is the wavenumber for the particle at $r\to\infty$, $E = \hbar^{2}k^{2}/2m$. There are two solutions to this differential equation; the solutions are known as Coulomb wave functions, $F_{\ell}$ and $G_{\ell}$.  The regular solution $F_{\ell}$ vanishes as $r\to 0$, and $G_{\ell}$ blows up at the origin.
 For $kr \gg 1$, the Coulomb wave functions go over to
 \begin{eqnarray}\label{e.coulombF}
 F_{\ell}(r) &\simeq& \sin\left[ kr - \frac{1}{2}\ell\pi -\gamma\ln(2kr) + \sigma_{\ell}\right]\\
@@ -313,7 +417,7 @@ Here the parameter $\sigma_{\ell}$ is a Coulomb phase shift, and the parameter
 \[ \gamma = \frac{1}{2\pi}\left(\frac{E_{G}}{E}\right)^{1/2} \]
 contains the Gamow energy.  This shouldn't be too surprising: since $F_{\ell}$ and $G_{\ell}$ are the exact solutions to the motion of a particle in a Coulomb potential, they must behave like what we found using a WKB approximation in some limit.
 
-For $r \geq R$, we can write our solution in terms of outgoing waves, $u_{\ell}^{+}$, and incoming waves, $u_{\ell}^{-}$; here the outgoing and incoming waves are defined as 
+For $r \geq R$, we can write our solution in terms of outgoing waves, $u_{\ell}^{+}$, and incoming waves, $u_{\ell}^{-}$; here the outgoing and incoming waves are defined as
 \begin{eqnarray*}
 u_{\ell}^{+} &=& e^{-i\sigma_{\ell}}\left[G_{\ell} + i F_{\ell}\right]\\
 u_{\ell}^{-} &=& e^{i\sigma_{\ell}}\left[G_{\ell} - i F_{\ell}\right].
@@ -383,7 +487,7 @@ We expect that near a resonance, the cross-section will have a Lorentzian profil
 \[
 \Gamma = \sum_{i}\Gamma_{i} + \Gamma_{\gamma}
 \]
-that is the sum of particle decay widths $\Gamma_{i}$ and widths for radiative transitions $\Gamma_{\gamma}$.  The entrance channel width will be proportional to $s_{\ell}=kRv_{\ell}$. Furthermore, a reaction will take place if the nucleus does something other than decay in the entrance channel, and this will occur with probability $\Gamma - \Gamma_{a}$.  
+that is the sum of particle decay widths $\Gamma_{i}$ and widths for radiative transitions $\Gamma_{\gamma}$.  The entrance channel width will be proportional to $s_{\ell}=kRv_{\ell}$. Furthermore, a reaction will take place if the nucleus does something other than decay in the entrance channel, and this will occur with probability $\Gamma - \Gamma_{a}$.
 
 Motivated by these considerations, we note that
 if we define the width for decay in the entrance channel as
@@ -394,7 +498,7 @@ the reaction width as (it can be shown that in general $\partial_{\varepsilon}\a
 \begin{equation}\label{e.Gamma-reaction}
 \Gamma_{r} = \Gamma-\Gamma_{\alpha} = -\frac{2KR\,q}{\partial_{\varepsilon}\alpha_{\ell}},
 \end{equation}
-and the ``observed'' resonance energy as 
+and the ``observed'' resonance energy as
 \[
 \varepsilon_{r,\mathrm{obs}} = \varepsilon_{r} + \frac{\Delta_{\ell}}{\partial_{\varepsilon}\alpha_{\ell}},
 \]
@@ -412,7 +516,7 @@ You might be troubled by our identification of the particle width, eq.~(\ref{e.G
 \[
 \Gamma_{a} \sim \hbar \left(\frac{4k}{K}\right)\left(\frac{D}{2\pi\hbar}\right)v_{\ell}.
 \]
-Now, when a plane wave is incident on a step in the potential, the transmission coefficient across the step is roughly $k/K$, as you can verify by solving a one-dimensional Schr\"odinger equation.  We saw earlier that classical oscillation period for a particle in a well is $2\pi\hbar/D$. Hence 
+Now, when a plane wave is incident on a step in the potential, the transmission coefficient across the step is roughly $k/K$, as you can verify by solving a one-dimensional Schr\"odinger equation.  We saw earlier that classical oscillation period for a particle in a well is $2\pi\hbar/D$. Hence
 \begin{eqnarray*}
 \lefteqn{\Gamma_{a} \sim \hbar\times(\textrm{oscillation frequency})}\\
 && \times(\textrm{transmission across potential step at nuclear surface})\\
@@ -422,7 +526,7 @@ But this is precisely what we would write down for $\hbar\times(\textrm{rate of 
 
 \subsection{A worked example}
 
-Consider the reaction $\boron[10](\pt,\alpha)\beryllium[7]$. We can think of this reaction proceeding first via the formation of a compound nucleus in an excited state, $\carbon[11]^{\star}$. It can be shown that the cross-section for the formation of $\carbon[11]^{\star}$ via proton capture is proportional to the width for the decay of that state via proton emission: 
+Consider the reaction $\boron[10](\pt,\alpha)\beryllium[7]$. We can think of this reaction proceeding first via the formation of a compound nucleus in an excited state, $\carbon[11]^{\star}$. It can be shown that the cross-section for the formation of $\carbon[11]^{\star}$ via proton capture is proportional to the width for the decay of that state via proton emission:
 \begin{equation}\label{e.reciprocity}
 \sigma(\pt + \boron[10]\to \carbon[11]^{\star}) \propto \Gamma_{\pt}.
 \end{equation}
@@ -456,7 +560,7 @@ For an ideal gas, the chemical potentials are given by eq.~(\ref{e.chem-pot-idea
 \begin{equation}\label{e.Xa-Y}
 	\frac{n_{X}n_{a}}{n_{Y}} = \frac{n^{Q}_{X}n^{Q}_{a}}{n^{Q}_{Y}}\exp\left(-\frac{Q}{\kB T}\right).
 \end{equation}
-In this expression we have substituted $Q = (m_{a}+m_{X}-m_{Y})c^{2}$, and 
+In this expression we have substituted $Q = (m_{a}+m_{X}-m_{Y})c^{2}$, and
 \[
 	n^{Q}_{i} = g_{i}\left(\frac{m_{i}\kB T}{2\pi\hbar^{2}}\right)^{3/2}.
 \]
@@ -470,12 +574,12 @@ This expression is specific to this type of reaction, but similar formula can be
 
 \section{Plasma corrections to the reaction rate}\label{s.correction-penetration}
 
-In stars, the nuclear reactions do not occur in isolation, but rather in the midst of a plasma.  The effect of these ambient charges is to screen the long-range Coulomb interaction. This in turn perturbs the penetration factors and hence the reaction rates. We now derive the lowest order correction \cite{Salpeter1954Electrons-Scree}. 
+In stars, the nuclear reactions do not occur in isolation, but rather in the midst of a plasma.  The effect of these ambient charges is to screen the long-range Coulomb interaction. This in turn perturbs the penetration factors and hence the reaction rates. We now derive the lowest order correction \cite{Salpeter1954Electrons-Scree}.
 
-The first thing to consider are the typical scales involved.  In a plasma, the mean interparticle spacing is 
+The first thing to consider are the typical scales involved.  In a plasma, the mean interparticle spacing is
 \[ a = \left(\frac{3A\mb}{4\pi \rho}\right)^{1/3} = 1.6\ee{4}\nsp\fermi\times A^{1/3}\left(\frac{100\nsp\grampercc}{\rho}\right)^{1/3},
 \]
-and the Debye length (cf.\ eq.~[\ref{e.linearized-Poisson}]) is 
+and the Debye length (cf.\ eq.~[\ref{e.linearized-Poisson}]) is
 \[
 \lambdaD = 2.8\ee{4}\nsp\fermi\times \left(\frac{T}{10^{7}\nsp\K}\right)^{1/2} \left(\frac{100\nsp\grampercc}{\rho}\right)^{1/2} \left(\frac{A}{\langle Z^{2}+Z\rangle}\right)^{1/2}.
 \]
@@ -519,4 +623,3 @@ q &=& \frac{1}{\rho}\left(\frac{Q_{pp}}{2}n_{\mathrm{H}}^{2} f^{\mathrm{scr}}_{p
 \label{e.heating-rate}
 \end{eqnarray}
 The equations for the change in chemical composition and the heating rate close our system of equations describing the structure and evolution of the star.  We are now ready to discuss the life cycle of stars in detail.
- 
